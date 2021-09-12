@@ -12,11 +12,10 @@ mode: dark # default theme "dark" | "light"
 author:
   name: JustHumanz # author name
   bio: >- # tell to the world
-    System administrator and Golang enthusiast
+    Cloud Engineer and Golang enthusiast
   username: JustHumanz # general username
   github: JustHumanz # github username
   twitter: Aldin_Py # twitter username
-  facebook: facebook_username # facebook username
   email: Aldinsetiawan99@Gmail.com # email adress
   avatar: https://yt3.ggpht.com/ytc/AAUvwnjsJfcixUjikXDieEp8GEvC5FAW4sgCUPJMxlTn8Q=s300-c-k-c0x00ffffff-no-rj # change with your own avatar
 
