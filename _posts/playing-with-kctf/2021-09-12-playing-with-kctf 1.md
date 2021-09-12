@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Playing with kctf,secure and scalable infrastructure for ctf competition"
+title:  "Playing with kctf,secure and scalable infrastructure for ctf competition 1"
 categories: security,ctf
 ---
 
