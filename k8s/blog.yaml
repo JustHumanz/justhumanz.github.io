@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: humanz-blog
+  labels:           
+    app: humanz-blog
+spec:
+  ports:
+  - name: humanz-blog
+    port: 4000      
+    targetPort: 4000
+  selector:         
+    app: humanz-blog
+
+---
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: humanz-blog
+  labels:
+    app: humanz-blog
+spec:
+  selector:
+    matchLabels:    
+      app: humanz-blog
+  replicas: 2       
+  template:         
+    metadata:
+      labels:       
+        app: humanz-blog
+    spec:           
+      containers:
+      - name: humanz-blog
+        image: registry.gitlab.com/${CI_REGISTRY_IMAGE}
+        imagePullPolicy: Always
+        envFrom:
+        ports:
+        - containerPort: 4000
+      restartPolicy: Always

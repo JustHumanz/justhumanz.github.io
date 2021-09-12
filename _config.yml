@@ -1,0 +1,90 @@
+# Site settings
+title: Humanz # site title
+description: >- # site description
+  Just Humanz blog
+lang: en-US # default lang
+timezone: Asia/Jakarta # set your timezone
+image: https://yt3.ggpht.com/ytc/AAUvwnjsJfcixUjikXDieEp8GEvC5FAW4sgCUPJMxlTn8Q=s300-c-k-c0x00ffffff-no-rj # This image used for Open Graph more info https://ogp.me/
+repo: https://github.com/piharpi/jekyll-klise # site repo [optional]
+mode: dark # default theme "dark" | "light"
+
+# Profile settings
+author:
+  name: JustHumanz # author name
+  bio: >- # tell to the world
+    System administrator and Golang enthusiast
+  username: JustHumanz # general username
+  github: JustHumanz # github username
+  twitter: Aldin_Py # twitter username
+  facebook: facebook_username # facebook username
+  email: Aldinsetiawan99@Gmail.com # email adress
+  avatar: https://yt3.ggpht.com/ytc/AAUvwnjsJfcixUjikXDieEp8GEvC5FAW4sgCUPJMxlTn8Q=s300-c-k-c0x00ffffff-no-rj # change with your own avatar
+
+# URL settings
+url: "https://humanz.moe" #
+baseurl:
+permalink: /:title/
+google_analytics: # leave it blank if not wish
+fb_appid:
+
+# Collection setting
+collections:
+  posts:
+    output: true
+
+# Markdown settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: post
+      comments: false
+
+# Jekyll Compose default front matter
+jekyll_compose:
+  post_default_front_matter:
+    modified:
+    tags: []
+    description:
+  draft_default_front_matter:
+    modified:
+    tags: []
+    description:
+
+# Homepage limit posts
+number_of_posts: 5
+
+# Build settings
+# theme: klise
+sass:
+  style: compressed
+
+include:
+  - _redirects
+  - .htaccess
+
+exclude:
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - CHANGELOG.md
+  - README.md
+  - node_modules
+  - CODE_OF_CONDUCT.md
+  - CONTRIBUTING.md
+  - lighthouse.png
+  - klise-*.gem
+  - klise.gemspec
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-postfiles

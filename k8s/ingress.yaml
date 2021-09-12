@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: humanz-blog
+spec:
+  tls:
+  - hosts:
+    - humanz.moe
+    secretName: humanz.moe
+    
+  rules:
+  - host: humanz.moe
+    http:
+      paths:
+      - backend:
+          serviceName: humanz-blog
+          servicePort: 4000        
