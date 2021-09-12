@@ -30,10 +30,10 @@ untuk web kctf bisa di setting untuk web app(apache+php) atau web service(golang
 ### PoC
 untuk PoC berbentuk video sudah pernah saya buat di [fb](https://web.facebook.com/kaitothethief/videos/346369657014412) saya,tapi untuk lebih jelasnya saya jabarkan disini saja  
 
-1.  pertama enable umask  
+1. pertama enable umask  
     `umask a+rx`  
 
-2.  terus install dependencies,dependenciesnya ada
+2. terus install dependencies,dependenciesnya ada
     ```
     xxd
     wget
@@ -88,7 +88,7 @@ untuk PoC berbentuk video sudah pernah saya buat di [fb](https://web.facebook.co
     ![1.png](../../assets/img/kctf/1.png)     
     disana kelihatan kalau kerenel yang dipake adalah `NSJAIL`
 
-7.  check kctf
+7. check kctf
     ```cd challenge```  
     terus buka vscode disana dan mulai oprek oprek sendiri
          
