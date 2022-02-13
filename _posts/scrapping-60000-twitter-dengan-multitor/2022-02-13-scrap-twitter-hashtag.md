@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "how i scrap 60000 twit without limitation"
+title:  "how i scrap more than 600000 twit without any limitation"
 categories: tips,web scraper,data mining
 image: https://yt3.ggpht.com/3kwFDm2XbFsmR6n8Lsa--k4oQYMIfKcN9o4xhZc7-nCVSw-O483UtEdCO55cdusiNC9HmfjR=s800-c-k-c0x00ffffff-no-rj
 ---
@@ -27,7 +27,7 @@ And the resource was not very heavy like before
 ![4.png](../../assets/img/tor/4.png)
 
 
-Now i already have more than 60000 twit in my database and keep increasing every minute 
+Now i already have more than 600000 twit in my database and keep increasing every minute 
 
 ![5.png](../../assets/img/tor/5.png)
 
