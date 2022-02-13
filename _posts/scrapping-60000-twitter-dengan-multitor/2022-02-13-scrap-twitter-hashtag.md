@@ -2,6 +2,7 @@
 layout: post
 title:  "how i scrap 60000 twit without limitation"
 categories: tips,web scraper,data mining
+image: https://yt3.ggpht.com/3kwFDm2XbFsmR6n8Lsa--k4oQYMIfKcN9o4xhZc7-nCVSw-O483UtEdCO55cdusiNC9HmfjR=s800-c-k-c0x00ffffff-no-rj
 ---
 
 So when i create one of the features of my bot I was stuck for 4 weeks because twitter API have some limitations and that was very annoying for my bot, like when the scrapper got blocked and after a while unblocked my bot will crash because the scrapper send tons of data and my bot can't handle it
