@@ -96,3 +96,8 @@ Three, Check the result
 ![1.png](../../assets/img/scale_scraping/1.png)     
 
 Now each units/nodes have UUID for identify and each units/nodes have diffrent payload.
+
+### PoC
+![2.png](../../assets/img/scale_scraping/2.png)     
+
+in twitter it's was 9:21 and 2:26 already send it into discord
