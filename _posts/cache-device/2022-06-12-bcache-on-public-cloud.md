@@ -63,10 +63,6 @@ here the full command&parameter i will use
     fio -direct=1 -iodepth=1 -rw=randread -ioengine=libaio -bs=4k -size=1G -numjobs=1 -group_reporting -filename=iotest -name=Rand_Read_Latency_Testingrandwrite -ioengine=libaio -bs=4k -size=1G -numjobs=1 -group_reporting -filename=iotest -name=Rand_Write_Latency_Testing  
 ```
 
-<details>
-
-<summary>Fio benchmark result</summary>
-
 ### Random write IOPS (4 KB for single I/O)
 
 #### HDD
@@ -768,8 +764,6 @@ Disk stats (read/write):
   vdb: ios=524293/20, merge=0/0, ticks=364259/56, in_queue=149148, util=99.96%
   vdc: ios=0/12, merge=0/0, ticks=0/4, in_queue=0, util=0.02%
 ```
-</details>
-
 
 ## Conclusion
 - In some case Bcache performance almost same like ssd (Random write/read) that because the cache device only have (2800 IOPS) meanwhile the ssd have (5800 IOPS) so the bcache performance depende on cache device
