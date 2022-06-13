@@ -11,8 +11,8 @@ Ok let's trying, in this lab i use alicloud for the public cloud platform and fo
 Here the lab environment
 - Ubuntu 20.04
 - 4 vCPU 4 GiB (ecs.ic5.xlarge)
-- 1 20GiB Enhanced SSD (ESSD) PL1 (2800 IOPS) (Cache device)
-- 1 80GiB Ultra Disk (2440 IOPS) (Backing device)
+- 1 20GiB Enhanced SSD (ESSD) PL1 (2800 IOPS) **Cache device**
+- 1 80GiB Ultra Disk (2440 IOPS) **Backing device**
 ------------------------------------------------------------
 - 1 80GiB Ultra Disk (2440 IOPS)
 - 1 80GiB Enhanced SSD (ESSD)  PL1 80GiB (5800 IOPS)
@@ -766,7 +766,7 @@ Disk stats (read/write):
 ```
 
 ## Conclusion
-- In some case Bcache performance almost same like ssd (Random write/read) that because the cache device only have (2800 IOPS) meanwhile the ssd have (5800 IOPS) so the bcache performance depende on cache device
-- Bcache have better performance at Sequential write/read throughput
-- Bcache performance in Random write/read latency was depended on cache device,just like point 1
-- Bcache can reduce half cost of disk usage,as example if you want create 100GB partition with high throughput & high IOPS you can create 100GB ultra disk ($3.070) then create around 25GB ssd ($3.230) that will cost = $6.3/month rather than create 100GB ssd will cost you $12.9/month
+- In some case, Bcache performance is almost the same as ssd (Random write/read) because the cache device only have (2800 IOPS) meanwhile the ssd have (5800 IOPS) so the bcache performance dependent on the cache device
+- Bcache has better performance at Sequential write/read throughput
+- Bcache performance in Random write/read latency was dependent on cache device, just like point 1
+- Bcache can reduce half cost of disk usage, as example, if you want to create 100GB partition with high throughput & high IOPS you can create 100GB ultra disk ($3.070) and then create around 25GB ssd ($3.230) that will cost = $6.3/month rather than create 100GB ssd will cost you $12.9/month
