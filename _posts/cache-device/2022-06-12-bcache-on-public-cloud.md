@@ -11,8 +11,8 @@ Ok let's trying, in this lab i use alicloud for the public cloud platform and fo
 Here the lab environment
 - Ubuntu 20.04
 - 4 vCPU 4 GiB (ecs.ic5.xlarge)
-- 1 20GiB Enhanced SSD (ESSD) PL1 (2800 IOPS) # Cache device
-- 1 80GiB Ultra Disk (2440 IOPS) # Backing device
+- 1 20GiB Enhanced SSD (ESSD) PL1 (2800 IOPS) #Cache device
+- 1 80GiB Ultra Disk (2440 IOPS) #Backing device
 ------------------------------------------------------------
 - 1 80GiB Ultra Disk (2440 IOPS)
 - 1 80GiB Enhanced SSD (ESSD)  PL1 80GiB (5800 IOPS)
