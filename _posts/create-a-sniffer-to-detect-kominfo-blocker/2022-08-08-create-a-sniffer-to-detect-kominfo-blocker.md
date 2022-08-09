@@ -49,3 +49,8 @@ skip forward,i don't want to review or explain my code because mainly i'm just c
 
 #### Bloker detection already created,so whats next?
 i think i can add the blocked ip into some list and reroute it on vpn? so only blocked website will accesing by vpn not all web.
+
+
+## Reference
+1. https://geneva.cs.umd.edu/papers/geneva_ccs19.pdf
+2. https://ipwithease.com/tcp-rst-flag/
