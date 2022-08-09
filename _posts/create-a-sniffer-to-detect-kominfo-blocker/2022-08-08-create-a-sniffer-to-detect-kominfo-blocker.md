@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "create a sniffer to detect kominfo blocker"
+title:  "Create a sniffer to detect kominfo blocker"
 categories: c,kominfo,block
 image: https://pbs.twimg.com/media/FZWPp1GVsAAfJa1.jpg
 ---
