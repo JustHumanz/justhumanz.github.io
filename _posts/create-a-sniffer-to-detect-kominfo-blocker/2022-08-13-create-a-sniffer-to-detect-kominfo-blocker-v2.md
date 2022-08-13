@@ -52,10 +52,10 @@ First i still need vpn for secondary network, at this point i use [OpenConnect](
 
 the workflow is very simple.
 
-1. First we access the blocked site,as example i will vist reddit so the flow will be like this.  
-    1. My pc will asking to ISP for accessing reddit  
-    2. ISP will forward my pc request to the internet
-    3. ISP found if reddit was blocked so ISP send the RST segment to my pc request
+#### First we access the blocked site,as example i will vist reddit so the flow will be like this.  
+1.My pc will asking to ISP for accessing reddit.  
+2.ISP will forward my pc request to the internet.  
+3.ISP found if reddit was blocked so ISP send the RST segment to my pc request.   
 
 ```
          Internet
@@ -74,8 +74,10 @@ the workflow is very simple.
              xx   x xxxxxx
               xxxx
 ```
-2. Then the sniffer will check very segments
-    4. `is this segments contain rst flag?` if the segments contain rst flag the script will extract segments information like ip address,port,etc and tell pc to rerouting the ip into secondary network
+
+#### Then the sniffer will check very segments
+4.`is this segments contain rst flag?` if the segments contain rst flag the script will extract segments information like ip address,port,etc and tell pc to rerouting the ip into secondary network
+
 ```
          Internet
 
@@ -94,7 +96,7 @@ the workflow is very simple.
               xxxx
 ```
 
-3. The pc will reroute the blocked website traffic to vpn connection.
+#### The pc will reroute the blocked website traffic to vpn connection.
 ```
                                                         ┌─────────────┐
                                                         │             │
