@@ -23,7 +23,7 @@ after see this flag i'm pretty sure if 100% somes ISP use this dpi for blocked w
 ### Then how to bypass it?
 well because it's was not dns level anymore so it's should be from tcp level.
 
-1. You can edit your tcp segments[2]
+1. You can edit your tcp segments[1]
 2. VPN or any tunneling connection
 
 for no 1 it's litle bit hard since i can't edit every tcp segments when i create http request. the easy way still use vpn or another tunneling connections but use options 2 was pain in ass. changeing all my network into vpn is not very wise because now all account on my browser detec me in another country and make my account more sus (especially with fb).
@@ -46,6 +46,8 @@ After some reseach i found if [gopacket](https://github.com/google/gopacket) or 
 skip forward,i don't want to review or explain my code because mainly i'm just copy paste and some parts i don't too understand
 
 [![IMAGE](https://i3.ytimg.com/vi/N-Oo62eh-uk/maxresdefault.jpg)](https://www.youtube.com/watch?v=N-Oo62eh-uk "Network sniffer with C")
+
+Full source code : https://github.com/JustHumanz/C-hell/blob/master/network/block_sniffer.c
 
 #### Bloker detection already created,so whats next?
 i think i can add the blocked ip into some list and reroute it on vpn? so only blocked website will accesing by vpn not all web.
