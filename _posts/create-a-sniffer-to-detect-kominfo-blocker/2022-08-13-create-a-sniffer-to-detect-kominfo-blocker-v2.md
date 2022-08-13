@@ -75,7 +75,7 @@ the workflow is very simple.
               xxxx
 ```
 
-#### Then the sniffer will check very segments
+#### Then the sniffer will check every segments
 4.`is this segments contain rst flag?` if the segments contain rst flag the script will extract segments information like ip address,port,etc and tell pc to rerouting the ip into secondary network
 
 ```
