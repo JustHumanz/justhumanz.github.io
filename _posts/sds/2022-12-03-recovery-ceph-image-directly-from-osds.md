@@ -70,7 +70,7 @@ white : the formula, so here the formula object size will multiple by object nam
 
 > but where you found the rebuild_block_size? is persistent value?
 
-512 was value from sector sizes,512 was the default size 
+[512 was value from sector sizes](https://wiki.archlinux.org/title/Advanced_Format),512 was the default size 
 
 ![9.png](../../assets/img/sds/9.png)    
 
@@ -159,5 +159,6 @@ refrence :
 - https://unix.stackexchange.com/questions/331968/recover-vm-images-from-dead-ceph-cluster
 - https://ceph.io/en/news/blog/2015/ceph-recover-a-rbd-image-from-a-dead-cluster/
 - https://github.com/smmoore/ceph/blob/master/rbd_restore.sh
+- https://wiki.archlinux.org/title/Advanced_Format
 
 special thx to [@kryptur](https://unix.stackexchange.com/users/206630/kryptur) and [@smmoore](https://github.com/smmoore)
