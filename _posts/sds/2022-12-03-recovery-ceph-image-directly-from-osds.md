@@ -152,7 +152,8 @@ open it with feh
 -----------------------------------------------------------------
 so i think that's all,hope you understand the point. 
 
-thx 
+in the end,ceph was so amazing&complex  
+ceph build it without any dependency and zero single point of failure
 
 refrence :
 - https://cloud.garr.it/support/kb/ceph/restore-ceph-from-mon-disaster/
