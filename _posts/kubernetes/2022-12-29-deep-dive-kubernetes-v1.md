@@ -2,7 +2,7 @@
 layout: post
 title:  "Deep Dive Kubernetes: Container"
 categories: kubernetes,container,runc
-image: https://cdn.humanz.moe/pixiv/?pixivURL=https://i.pximg.net/img-original/img/2022/12/24/01/14/34/103845644_p0.png
+image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/103845644.png
 ---
 
 ## Understanding what is actually is container
