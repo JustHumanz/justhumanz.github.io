@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Deep dive kubernetes: Container"
+title:  "Deep Dive Kubernetes: Container"
 categories: kubernetes,container,runc
 image: https://pbs.twimg.com/media/FkvW0wLakAcnDs9?format=jpg&name=large
 ---
