@@ -7,7 +7,7 @@ image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/EuK5
 In my previous i tank about **container** now time to level up,yep from this post i will talk about kubernetes or k8s but the perfective still same with the title i will talk on low level of kubernetes, so if you come here to learning about istio,service mash,cicd or another mumbo jumbo i think you on worng train mate
 
 ## Pause
-Before you learn how to deploy or doing scaling up/down did you know about pause in kubernetes? if you experiance with minikube or your container runtime is docker i'm pretty sure if you already this container but i'm pretty sure also if you don't event know what the hell is pause 
+Before you learn how to deploy or doing scaling up/down did you know about pause in kubernetes? if you experiance with minikube or your container runtime is docker i'm pretty sure if you already see this container but i'm pretty sure also if you don't event know what the hell is pause container 
 
 just like usually, let's read the official docs about pause container  
 .........  
