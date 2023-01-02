@@ -108,7 +108,9 @@ pause container will create namespace then the real container aka alpine will at
 if you ask why kubernetes do this?
 
 the simple answer is  
-`if something happen with the 'real' container (ie: crash,exit non zero,etc) the 'real' container will not lose the ip address and that make the cni will not fucked up when many pods are restarting in same time`
+```
+if something happen with the 'real' container (ie: crash,exit non zero,etc) the 'real' container will not lose the ip address and that make the cni will not fucked up when many pods are restarting in same time
+```
 
 ### Another way
 ![10.png](../../assets/img/kubernetes/pods/10.png)
