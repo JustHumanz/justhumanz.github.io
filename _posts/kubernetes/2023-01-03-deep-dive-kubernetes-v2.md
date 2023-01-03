@@ -24,7 +24,7 @@ In that article says if pause container was a **parrent container** and have two
 What the meaning of that?  
 Well if you already read my previous post and trying to create container manualy i think you should have better imagination about this, or even you already know what the point of pause container. but sure some of you was speed runner who just want the answer from post whitout doing the boring experiment
 
-in my previous post i'm alredy explain to you all about **container** aka fancy namespaces, remember if container is namespaces and every namespaces have own id right? and if the namespaces id was same they will sharing resource right?   
+in my previous post i'm already explain to you all about **container** aka fancy namespaces, remember if container is namespaces and every namespaces have own id right? and if the namespaces id was same they will sharing resource right?   
 
 now imagine if i create container A also i'm setup the network,after that i create the container B buttttt **i also attach the network namespace from container A to B** so container A and B will have same network namespaces  
 
@@ -122,7 +122,7 @@ as you can see the containerd runtime use pause container id as primary containe
 ### PoC
 ![11.png](../../assets/img/kubernetes/pods/11.png)
 
-so in here i was trying to kill alpine container and the kubernetes will recreate the alpine container but because alpine container was only attaching pause namespaces that make the ip address of container was persistent
+so in here i was trying to kill alpine container and the kubernetes will recreate the alpine container but because the ip configuration was done by pause and alpine container just attach it so the ip address was not changing 
 
 ## Multiple container at one pod(sidecar)
 In theory you can have multiple container on 1 pods
@@ -225,4 +225,58 @@ from namespace they have same pid and same mount point
 
 
 ## Resources
-TODO
+Resources or pods qouta is one of container feature where you can request or limit the resource 
+
+in example you can define if one container was request 256MB memory to kube schduler and that container only can use 512MB memory
+
+Now the question is,how kubernetes limit the container?
+
+
+![16.png](../../assets/img/kubernetes/pods/16.png)
+
+in [kubernetes docs](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) they say if kubernetes use cgroup
+
+![17.png](../../assets/img/kubernetes/pods/17.png)
+
+from [arch wiki](https://wiki.archlinux.org/title/cgroups) **i use arch btw** it's says **feature provided by the Linux kernel to manage, restrict, and audit groups of processes** 
+
+so cgroup is like frontend of kernel resource limitation (?) , anyway let's cek how cgroup do limitiaton on container
+
+
+![18.png](../../assets/img/kubernetes/pods/18.png)
+
+first let's get the container id and inspect it and get the cgroupPath
+
+![19.png](../../assets/img/kubernetes/pods/19.png)
+
+as you can see, in cgroupPath many stored config file (?) 
+
+![20.png](../../assets/img/kubernetes/pods/20.png)
+
+One of file was named **memory.limit_in_bytes** and the value is **104857600** but if i divided it with 1024/1024 the result was 100,same like the memory limit.
+
+![21.png](../../assets/img/kubernetes/pods/21.png)
+
+One things i notice is there no one config file for `request` resource,  
+i though `memory.soft_limit_in_bytes` was the request config file but it's not
+
+![22.png](../../assets/img/kubernetes/pods/22.png)
+
+And i just realized if the `request` paremeter was not soft limit, request parameter was only used for kube-schdule **The memory request is mainly used during (Kubernetes) Pod scheduling**
+
+### PoC
+let's create OOM in container
+
+![23.png](../../assets/img/kubernetes/pods/23.png)
+
+install gcc for running the memory stress
+
+![24.png](../../assets/img/kubernetes/pods/24.png)
+
+compail it and we ready to go
+
+![25.png](../../assets/img/kubernetes/pods/25.png)
+
+before run the mem stress exec `dmesg -w` in ubuntu-nested-3 and then run the mem stress
+
+as you can see the ubuntu-nested-3 kernel send a oom message,that happen because the mem stress trying to use 256Mb of memory but the limit is 100Mb and then the process got killed
