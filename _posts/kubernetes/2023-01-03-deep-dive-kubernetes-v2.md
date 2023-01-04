@@ -4,7 +4,7 @@ title:  "Deep Dive Kubernetes: Pods"
 categories: kubernetes,container,pods,pause
 image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/EuK5lVxVkAArNo0.jpeg
 ---
-In my previous i tank about **container** now time to level up,yep from this post i will talk about kubernetes or k8s but the perfective still same with the title i will talk on low level of kubernetes, so if you come here to learning about istio,service mash,cicd or another mumbo jumbo i think you on worng train mate
+In my previous i talk about **container** now time to level up,yep from this post i will talk about kubernetes or k8s but the perfective still same with the title i will talk on low level of kubernetes, so if you come here to learning about istio,service mash,cicd or another mumbo jumbo i think you on worng train mate
 
 ## Pause
 Before you learn how to deploy or doing scaling up/down did you know about pause in kubernetes? if you experiance with minikube or your container runtime is docker i'm pretty sure if you already see this container but i'm pretty sure also if you don't event know what the hell is pause container 
@@ -238,7 +238,7 @@ in [kubernetes docs](https://kubernetes.io/docs/concepts/configuration/manage-re
 
 ![17.png](../../assets/img/kubernetes/pods/17.png)
 
-from [arch wiki](https://wiki.archlinux.org/title/cgroups) **i use arch btw** it's says **feature provided by the Linux kernel to manage, restrict, and audit groups of processes** 
+from [arch wiki](https://wiki.archlinux.org/title/cgroups) **(i use arch btw)** it's says **feature provided by the Linux kernel to manage, restrict, and audit groups of processes** 
 
 so cgroup is like frontend of kernel resource limitation (?) , anyway let's cek how cgroup do limitiaton on container
 
@@ -258,7 +258,7 @@ One of file was named **memory.limit_in_bytes** and the value is **104857600** b
 ![21.png](../../assets/img/kubernetes/pods/21.png)
 
 One things i notice is there no one config file for `request` resource,  
-i though `memory.soft_limit_in_bytes` was the request config file but it's not
+i thought `memory.soft_limit_in_bytes` was the request config file but it's not
 
 ![22.png](../../assets/img/kubernetes/pods/22.png)
 
@@ -273,7 +273,7 @@ install gcc for running the memory stress
 
 ![24.png](../../assets/img/kubernetes/pods/24.png)
 
-compail it and we ready to go
+compile it and we ready to go
 
 ![25.png](../../assets/img/kubernetes/pods/25.png)
 
