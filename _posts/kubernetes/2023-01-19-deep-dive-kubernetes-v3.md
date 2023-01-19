@@ -452,3 +452,338 @@ remember the ip 200.0.0.101 was fake right? but keep in mind the request package
 
 
 ## Ingress
+Ingress basically just web server(nginx,httpd,traefik) for kubernetes.
+
+
+![10.png](../../assets/img/kubernetes/network/10.png)
+
+See,that all function just like nginx in your vps
+
+only one things i'm interested (i'm can deep dive) in ingress the dynamic upstream was kinda magic for me,if you ever setting a upstream in nginx you should know if we want to add/remove the upstream we should restart the nginx right? but how nginx-ingress do that?
+
+time to deep dive
+
+here was example of nginx-ingress with domain mklntic.moe :
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mklntic-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  defaultBackend:
+    service:
+      name: kano-svc
+      port:
+        number: 80
+  ingressClassName: nginx
+  rules:
+  - host: "mklntic.moe"
+    http:
+      paths:
+      - path: /kano
+        pathType: Prefix
+        backend:
+          service:
+            name: kano-svc
+            port:
+              number: 80
+      - path: /lon
+        pathType: Prefix
+        backend:
+          service:
+            name: lon-svc
+            port:
+              number: 80
+```
+
+let's try to curl it
+
+```bash
+root@ubuntu-nested-1:~/ingress# kubectl get pods -o wide
+NAME                                 READY   STATUS    RESTARTS   AGE     IP                NODE              NOMINATED NODE   READINESS GATES
+alpine-deployment-6c7486cfcf-gpgbd   1/1     Running   25         2d19h   100.100.113.207   ubuntu-nested-3   <none>           <none>
+kano-deployment-6c6c494846-d855x     2/2     Running   0          45s     100.100.113.212   ubuntu-nested-3   <none>           <none>
+lon-deployment-6bfc6dcfb-j76g2       2/2     Running   0          82s     100.100.113.211   ubuntu-nested-3   <none>           <none>
+root@ubuntu-nested-1:~/ingress# kubectl get Ingress
+NAME              CLASS   HOSTS         ADDRESS       PORTS   AGE
+mklntic-ingress   nginx   mklntic.moe   200.0.0.100   80      13m
+root@ubuntu-nested-1:~/ingress# curl -s -H "Host: mklntic.moe" 200.0.0.100
+Kano/鹿乃
+root@ubuntu-nested-1:~/ingress# curl -s -H "Host: mklntic.moe" 200.0.0.100/lon
+Lon/ろん
+root@ubuntu-nested-1:~/ingress# curl -s -H "Host: mklntic.moe" 200.0.0.100/kano
+Kano/鹿乃
+```
+
+As you can see when i do curl to default domain the result was **Kano/鹿乃** and if i'm add `/lon` prefix the output was **Lon/ろん**
+
+Now let's try to check what is inside of nginx-ingress
+
+![11.png](../../assets/img/kubernetes/network/11.png)
+
+
+Fist let's try to open&understand `nginx.conf`
+
+![12.png](../../assets/img/kubernetes/network/12.png)
+
+So in this config nginx using lua script to generate logging,balancer,cert,etc
+
+
+![13.png](../../assets/img/kubernetes/network/13.png)
+
+In here nginx just call and init the lua script
+
+![14.png](../../assets/img/kubernetes/network/14.png)
+
+On `upstream_balancer` block nginx trying do call balancer.balance() func from lua script
+
+![15.png](../../assets/img/kubernetes/network/15.png)
+
+And from here was the nginx server block started,as you can see the server_name was same like `host` in Ingress yaml
+
+![16.png](../../assets/img/kubernetes/network/16.png)
+
+And the last line of this server block is rewrite the path,basicly just removing the `/kano` from url request
+
+![17.png](../../assets/img/kubernetes/network/17.png)
+
+And here was the last line of nginx config,as you can see the last line of nginx config was filled by nginx configuration (?) and that block only listen on localhost, now let's try to curl `/configuration`
+
+```bash
+bash-5.1$ curl localhost:10246/configuration
+Not found!
+```
+
+Hemm it's failed,i wonder why? let's read the **configuration.call()** func
+
+![19.png](../../assets/img/kubernetes/network/19.png)
+
+from .call() we can see if this function will call another function from the url request
+
+1. `/configuration/servers` will call `handle_servers()` and this func only accept POST method,so better skip this func
+
+2. `/configuration/general` will call `handle_general()` but this func only print the `_M.get_general_data`
+
+3. `/configuration/certs` i skip this because i'm not set any ssl/cert
+
+4. `/configuration/backends` this last func will call and print `_M.get_backends_data`
+
+Now we can do trying to make a request for general and backends
+
+```bash
+root@ubuntu-nested-1:~/ingress# kubectl exec -it -n ingress-nginx pods/ingress-nginx-controller-85786f6c49-sgvf6  -- curl 127.0.0.1:10246/configuration/general
+nil
+```
+
+empty lol, let's try backends
+
+```bash
+root@ubuntu-nested-1:~/ingress# kubectl exec -it -n ingress-nginx pods/ingress-nginx-controller-85786f6c49-sgvf6  -- curl 127.0.0.1:10246/configuration/backends
+[{"name":"default-kano-svc-80","service":{"metadata":{"creationTimestamp":null},"spec":{"ports":[{"name":"http","protocol":"TCP","port":80,"targetPort":80}],"selector":{"app":"kano-app"},"clusterIP":"10.106.186.178","clusterIPs":["10.106.186.178"],"type":"ClusterIP","sessionAffinity":"None"},"status":{"loadBalancer":{}}},"port":0,"sslPassthrough":false,"endpoints":[{"address":"100.100.113.212","port":"80"}],"sessionAffinityConfig":{"name":"","mode":"","cookieSessionAffinity":{"name":""}},"upstreamHashByConfig":{"upstream-hash-by-subset-size":3},"noServer":false,"trafficShapingPolicy":{"weight":0,"weightTotal":0,"header":"","headerValue":"","headerPattern":"","cookie":""}},{"name":"default-lon-svc-80","service":{"metadata":{"creationTimestamp":null},"spec":{"ports":[{"name":"http","protocol":"TCP","port":80,"targetPort":80}],"selector":{"app":"lon-app"},"clusterIP":"10.102.163.154","clusterIPs":["10.102.163.154"],"type":"ClusterIP","sessionAffinity":"None"},"status":{"loadBalancer":{}}},"port":80,"sslPassthrough":false,"endpoints":[{"address":"100.100.113.211","port":"80"}],"sessionAffinityConfig":{"name":"","mode":"","cookieSessionAffinity":{"name":""}},"upstreamHashByConfig":{"upstream-hash-by-subset-size":3},"noServer":false,"trafficShapingPolicy":{"weight":0,"weightTotal":0,"header":"","headerValue":"","headerPattern":"","cookie":""}},{"name":"upstream-default-backend","port":0,"sslPassthrough":false,"endpoints":[{"address":"127.0.0.1","port":"8181"}],"sessionAffinityConfig":{"name":"","mode":"","cookieSessionAffinity":{"name":""}},"upstreamHashByConfig":{},"noServer":false,"trafficShapingPolicy":{"weight":0,"weightTotal":0,"header":"","headerValue":"","headerPattern":"","cookie":""}}]root@ubuntu-nested-1:~/ingress#
+```
+
+jakpot let me format it 
+
+```json
+[
+    {
+        "name": "default-kano-svc-80",
+        "service": {
+            "metadata": {
+                "creationTimestamp": null
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "http",
+                        "protocol": "TCP",
+                        "port": 80,
+                        "targetPort": 80
+                    }
+                ],
+                "selector": {
+                    "app": "kano-app"
+                },
+                "clusterIP": "10.106.186.178",
+                "clusterIPs": [
+                    "10.106.186.178"
+                ],
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        "port": 0,
+        "sslPassthrough": false,
+        "endpoints": [
+            {
+                "address": "100.100.113.212",
+                "port": "80"
+            }
+        ],
+        "sessionAffinityConfig": {
+            "name": "",
+            "mode": "",
+            "cookieSessionAffinity": {
+                "name": ""
+            }
+        },
+        "upstreamHashByConfig": {
+            "upstream-hash-by-subset-size": 3
+        },
+        "noServer": false,
+        "trafficShapingPolicy": {
+            "weight": 0,
+            "weightTotal": 0,
+            "header": "",
+            "headerValue": "",
+            "headerPattern": "",
+            "cookie": ""
+        }
+    },
+    {
+        "name": "default-lon-svc-80",
+        "service": {
+            "metadata": {
+                "creationTimestamp": null
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "http",
+                        "protocol": "TCP",
+                        "port": 80,
+                        "targetPort": 80
+                    }
+                ],
+                "selector": {
+                    "app": "lon-app"
+                },
+                "clusterIP": "10.102.163.154",
+                "clusterIPs": [
+                    "10.102.163.154"
+                ],
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        "port": 80,
+        "sslPassthrough": false,
+        "endpoints": [
+            {
+                "address": "100.100.113.211",
+                "port": "80"
+            }
+        ],
+        "sessionAffinityConfig": {
+            "name": "",
+            "mode": "",
+            "cookieSessionAffinity": {
+                "name": ""
+            }
+        },
+        "upstreamHashByConfig": {
+            "upstream-hash-by-subset-size": 3
+        },
+        "noServer": false,
+        "trafficShapingPolicy": {
+            "weight": 0,
+            "weightTotal": 0,
+            "header": "",
+            "headerValue": "",
+            "headerPattern": "",
+            "cookie": ""
+        }
+    },
+    {
+        "name": "upstream-default-backend",
+        "port": 0,
+        "sslPassthrough": false,
+        "endpoints": [
+            {
+                "address": "127.0.0.1",
+                "port": "8181"
+            }
+        ],
+        "sessionAffinityConfig": {
+            "name": "",
+            "mode": "",
+            "cookieSessionAffinity": {
+                "name": ""
+            }
+        },
+        "upstreamHashByConfig": {},
+        "noServer": false,
+        "trafficShapingPolicy": {
+            "weight": 0,
+            "weightTotal": 0,
+            "header": "",
+            "headerValue": "",
+            "headerPattern": "",
+            "cookie": ""
+        }
+    }
+]
+```
+
+from that payload we can see spesific items like Cluster IP,Pod IP,Selector,etc
+
+Back to my curiosity about dynamic upstream in nginx-ingress.Now let's try to scale up somes pods and see the payload again
+
+
+```bash
+root@ubuntu-nested-1:~/ingress# kubectl scale deployment/kano-deployment --replicas=2
+deployment.apps/kano-deployment scaled
+root@ubuntu-nested-1:~/ingress# kubectl get pods -o wide -l app=kano-app
+NAME                               READY   STATUS    RESTARTS   AGE   IP                NODE              NOMINATED NODE   READINESS GATES
+kano-deployment-6c6c494846-4pj8q   2/2     Running   0          74s   100.100.113.213   ubuntu-nested-3   <none>           <none>
+kano-deployment-6c6c494846-d855x   2/2     Running   0          80m   100.100.113.212   ubuntu-nested-3   <none>           <none>
+root@ubuntu-nested-1:~/ingress#
+```
+
+now the kano-deployment is scaling up to 2 replicas with the ip of new pods is `100.100.113.213`. let see the payload
+
+```bash
+root@ubuntu-nested-1:~/ingress# kubectl exec -it -n ingress-nginx pods/ingress-nginx-controller-85786f6c49-sgvf6  -- curl 127.0.0.1:10246/configuration/backends | jq "." | grep kano-app -A 30
+          "app": "kano-app"
+        },
+        "clusterIP": "10.106.186.178",
+        "clusterIPs": [
+          "10.106.186.178"
+        ],
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    "port": 0,
+    "sslPassthrough": false,
+    "endpoints": [
+      {
+        "address": "100.100.113.212",
+        "port": "80"
+      },
+      {
+        "address": "100.100.113.213",
+        "port": "80"
+      }
+    ],
+    "sessionAffinityConfig": {
+      "name": "",
+      "mode": "",
+      "cookieSessionAffinity": {
+        "name": ""
+      }
+```
+
+Yep,the endpoints was added,before scaling the endpoints only one but now payload have two endpoints with new ip address.
