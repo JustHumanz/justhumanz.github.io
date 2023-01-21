@@ -36,7 +36,7 @@ in readme [github](https://github.com/opencontainers/runc#runc) it's say *runc i
 
 ![4.png](../../assets/img/kubernetes/container/4.png)
 
-from the [website](https://opencontainers.org/about/overview/) it say pen Container Initiative aka OCI is a governance structure and that structure have 3 specifications (runtime,image,distribution)
+from the [website](https://opencontainers.org/about/overview/) it say open Container Initiative aka OCI is a governance structure and that structure have 3 specifications (runtime,image,distribution)
 
 in example if you exec docker run bla bla it will trigger/running that 3 specifications in background
 

@@ -238,7 +238,7 @@ if you read the doc completely you may not surprised, let see again the doc
 
 ![5.png](../../assets/img/kubernetes/network/5.png)
 
-in that doc was clearly was **iptables rule might get created**
+in kube doc that was write clearly **iptables rule might get created**
 
 now let's check the rule
 
