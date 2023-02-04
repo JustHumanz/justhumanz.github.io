@@ -11,6 +11,7 @@ Usualy if you using public cloud the CNI already configurated (not very sure,i'm
 ![1.png](../../assets/img/kubernetes/cni/1.png)
 
 I'm pretty sure if you was using one of [those CNI](https://github.com/containernetworking/cni#3rd-party-plugins)
+
 --------------------------------
 
 But in this time i'm will not talk/compare/benchmark about those CNI (compare/benchmark without knowing the basic of technology was dumb and waste your time), yep just like usually i will talk how to create it from scratch.
