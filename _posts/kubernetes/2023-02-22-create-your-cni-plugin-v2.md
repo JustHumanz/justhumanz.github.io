@@ -40,7 +40,6 @@ type Humanz_CNI struct {
 	Name       string `json:"name"`
 	Type       string `json:"type"`
 	Bridge     string `json:"bridge"`
-	Network    string `json:"network"`
 	Subnet     string `json:"subnet"`
 }
 
@@ -154,13 +153,8 @@ in here i'm just unmarshal/read the network config and yes i'm take the data fro
 
 ```golang
 IPS := InitDB(sb.Subnet)
-BridgeName := sb.Bridge
-gatewayIP, gatewayNet, err := net.ParseCIDR(IPS[0].IP)
-if err != nil {
-    return err
-}
 ```
-after that i'm was calc the subnet in **InitDB** fuction, in example
+after that i'm was calc the subnet in **InitDB** fuction, the subnet was `100.100.0.0/24` so it's will return an array with Humanz_CNI_Storage format,so it's will look like this
 
 ```json
 [
@@ -171,14 +165,15 @@ after that i'm was calc the subnet in **InitDB** fuction, in example
     {
         "IP"   : "100.100.0.2/24",
         "Used" : false,
-    }.
+    },
     {
         "IP"   : "100.100.0.3/24",
         "Used" : false,
-    }.    
+    },
 ]
 ```
-the subnet was `100.100.0.0/24` so it's will return an array with Humanz_CNI_Storage format,so it's will look like
+
+
 
 ```golang
 BridgeName := sb.Bridge
@@ -197,6 +192,7 @@ if err != nil {
     return err
 }
 ```
+
 here i was create the bridge beetwen veth and os network.`IPS[0]` that will take the fist item of list and the first item will become the gateway 
 
 ```golang
@@ -216,6 +212,7 @@ if err != nil {
     return err
 }
 ```
+
 after the bridge getting created now i can create the veth interface and set the ip address, first is getting the linux namespaces after that get the free ip from IPS array, the last is creating the veth interfaces and set ip&default route
 
 ```golang
