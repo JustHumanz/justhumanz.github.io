@@ -404,3 +404,5 @@ os.Exit(0)
 ```
 And here was the last part, in here i'm just creating `node watcher` so if new node was joining the cluster `humanz-cni-agent` will add the ip route automatically.
 
+
+And now all was fully automatic,no more set ip route or setup nat in each nodes.
