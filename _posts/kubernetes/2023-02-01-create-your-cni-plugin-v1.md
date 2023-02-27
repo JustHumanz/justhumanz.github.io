@@ -43,7 +43,6 @@ nano /etc/cni/net.d/10-humanz-cni-plugin.conf
     "name": "humanz-cni",
     "type": "humanz-cni",
     "bridge": "humanz-cni0",
-    "network": "100.100.0.0/16",
     "subnet": "100.100.X.0/24"
 }
 ```
