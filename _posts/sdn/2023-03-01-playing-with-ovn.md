@@ -30,21 +30,29 @@ from this topology my goal is to connection vm1 to vm2, ofcourse that vm will ho
 ## Setup
 
 All nodes
-- `sudo add-apt-repository cloud-archive:ussuri`
-- `sudo apt install -y openvswitch-common openvswitch-switch ovn-common ovn-host`
+```bash
+sudo add-apt-repository cloud-archive:ussuri
+sudo apt install -y openvswitch-common openvswitch-switch ovn-common ovn-host
+```
 
 On controller only
-- `sudo apt install -y ovn-central`
-- `sudo ovn-sbctl set-connection ptcp:6642`
-- `sudo ovn-nbctl set-connection ptcp:6641`
-- `sudo netstat -lntp | grep 664`
+```bash
+sudo apt install -y ovn-central
+sudo ovn-sbctl set-connection ptcp:6642
+sudo ovn-nbctl set-connection ptcp:6641
+sudo netstat -lntp | grep 664
+```
 
 Set openvswitch table,fill `ovn-remote` and `ovn-nb` parameter with controller ip, meanwhile the `ovn-encap-ip` with host ip
 
-- `ovs-vsctl set open_vswitch . external_ids:ovn-remote="tcp:192.168.122.173:6642" external_ids:ovn-nb="tcp:192.168.122.173:6641" external_ids:ovn-encap-ip=192.168.122.173 external_ids:ovn-encap-type="geneve" external_ids:system-id="host1"`
+```bash
+ovs-vsctl set open_vswitch . external_ids:ovn-remote="tcp:192.168.122.173:6642" external_ids:ovn-nb="tcp:192.168.122.173:6641" external_ids:ovn-encap-ip=192.168.122.173 external_ids:ovn-encap-type="geneve" external_ids:system-id="host1"
+```
 
 On compute
-- `ovs-vsctl set open_vswitch . external_ids:ovn-remote="tcp:192.168.122.173:6642" external_ids:ovn-nb="tcp:192.168.122.173:6641" external_ids:ovn-encap-ip=$(COMPUTE_IP) external_ids:ovn-encap-type="geneve" external_ids:system-id="$(COMPUTE_NUMBER)"`
+```bash
+ovs-vsctl set open_vswitch . external_ids:ovn-remote="tcp:192.168.122.173:6642" external_ids:ovn-nb="tcp:192.168.122.173:6641" external_ids:ovn-encap-ip=$(COMPUTE_IP) external_ids:ovn-encap-type="geneve" external_ids:system-id="$(COMPUTE_NUMBER)"
+```
 
 if all already executed we can verify all config by `ovn-sbctl show`
 
@@ -70,13 +78,21 @@ root@ubuntu-nested-1:~#
 the Chassis value will taken from `system-id` when i'm set the ovs table.
 
 ## Create logical switch
-- `ovn-nbctl ls-add net-1` Just creating logical which with `ovn-nbctl ls-add net-1` (ls-add mean logical-switch add) and the switch name is net-1,we can verify with `ovn-sbctl ls-list`
-- `ovn-nbctl set logical_switch net-1 other_config:subnet="10.0.0.0/24" other_config:exclude_ips="10.0.0.1"` Give some cidr and exclude_ip config for net-1 switch.
-- `ovn-nbctl lsp-add net-1 vm1` Create a virtual port 
-- `ovn-nbctl lsp-set-addresses vm1 "00:00:00:00:01:01 10.0.0.10"` Set mac and ip address for vm1 port
+```bash
+ovn-nbctl ls-add net-1
+ovn-nbctl set logical_switch net-1 other_config:subnet="10.0.0.0/24" other_config:exclude_ips="10.0.0.1"
+```
+Creating logical which with `ovn-nbctl ls-add net-1` (ls-add mean logical-switch add) and the switch name is net-1,we can verify with `ovn-sbctl ls-list` and Give some cidr and exclude_ip config for net-1 switch.
 
-- `ovn-nbctl lsp-add net-1 vm2` Create a virtual port for vm2
-- `ovn-nbctl lsp-set-addresses vm2 "00:00:00:00:01:02 10.0.0.20"` Set mac and ip address for vm2 port
+```bash
+ovn-nbctl lsp-add net-1 vm1
+ovn-nbctl lsp-set-addresses vm1 "00:00:00:00:01:01 10.0.0.10"
+
+ovn-nbctl lsp-add net-1 vm2
+ovn-nbctl lsp-set-addresses vm2 "00:00:00:00:01:02 10.0.0.20"
+```
+Create a virtual port & Set mac and ip address for vm1&2 port
+
 
 you can verify with `ovn-nbctl lsp-list net-1`
 
@@ -84,28 +100,33 @@ you can verify with `ovn-nbctl lsp-list net-1`
 In compute 1 i'm will set vm1 and vm2 on compute 2.
 
 Compute 1 
-- `ip link add vm1-peer type veth peer name vm1`
-- `ovs-vsctl add-port br-int vm1-peer`
-- `ovs-vsctl set interface vm1-peer external_ids:iface-id=vm1`
-- `ip link set vm1-peer up`
-- `ip netns add vm1-ns`
-- `ip link set vm1 netns vm1-ns`
-- `ip netns exec vm1-ns ip link set dev vm1 address 00:00:00:00:01:01` Make sure the mac address was same
-- `ip netns exec vm1-ns ip link set vm1 up`
-- `ip netns exec vm1-ns ip add add 10.0.0.10/24 dev vm1`
-- `ip netns exec vm1-ns ip a`
+```bash
+ip link add vm1-peer type veth peer name vm1
+ovs-vsctl add-port br-int vm1-peer
+ovs-vsctl set interface vm1-peer external_ids:iface-id=vm1
+ip link set vm1-peer up
+ip netns add vm1-ns
+ip link set vm1 netns vm1-ns
+ip netns exec vm1-ns ip link set dev vm1 address 00:00:00:00:01:01
+ip netns exec vm1-ns ip link set vm1 up
+ip netns exec vm1-ns ip add add 10.0.0.10/24 dev vm1
+ip netns exec vm1-ns ip a
+```
+Make sure the mac address was same
 
 Compute 2
-- `ip link add vm2-peer type veth peer name vm2`
-- `ovs-vsctl add-port br-int vm2-peer`
-- `ovs-vsctl set interface vm2-peer external_ids:iface-id=vm2`
-- `ip link set vm2-peer up`
-- `ip netns add vm2-ns`
-- `ip link set vm2 netns vm2-ns`
-- `ip netns exec vm2-ns ip link set dev vm2 address 00:00:00:00:01:02` Make sure the mac address was same 
-- `ip netns exec vm2-ns ip link set vm2 up`
-- `ip netns exec vm2-ns ip add add 10.0.0.20/24 dev vm2`
-- `ip netns exec vm2-ns ip a`
+```bash
+ip link add vm2-peer type veth peer name vm2
+ovs-vsctl add-port br-int vm2-peer
+ovs-vsctl set interface vm2-peer external_ids:iface-id=vm2
+ip link set vm2-peer up
+ip netns add vm2-ns
+ip link set vm2 netns vm2-ns
+ip netns exec vm2-ns ip link set dev vm2 address 00:00:00:00:01:02
+ip netns exec vm2-ns ip link set vm2 up
+ip netns exec vm2-ns ip add add 10.0.0.20/24 dev vm2
+ip netns exec vm2-ns ip a
+```
 
 ## Test
 On compute 1
