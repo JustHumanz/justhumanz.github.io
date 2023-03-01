@@ -38,7 +38,9 @@ On controller only
 - `sudo ovn-sbctl set-connection ptcp:6642`
 - `sudo ovn-nbctl set-connection ptcp:6641`
 - `sudo netstat -lntp | grep 664`
+
 Set openvswitch table,fill `ovn-remote` and `ovn-nb` parameter with controller ip, meanwhile the `ovn-encap-ip` with host ip
+
 - `ovs-vsctl set open_vswitch . external_ids:ovn-remote="tcp:192.168.122.173:6642" external_ids:ovn-nb="tcp:192.168.122.173:6641" external_ids:ovn-encap-ip=192.168.122.173 external_ids:ovn-encap-type="geneve" external_ids:system-id="host1"`
 
 On compute
@@ -68,13 +70,13 @@ root@ubuntu-nested-1:~#
 the Chassis value will taken from `system-id` when i'm set the ovs table.
 
 ## Create logical switch
-- `ovn-nbctl ls-add net-1` just creating logical which with `ovn-nbctl ls-add net-1` (ls-add mean logical-switch add) and the switch name is net-1,we can verify with `ovn-sbctl ls-list`.
-- `ovn-nbctl set logical_switch net-1 other_config:subnet="10.0.0.0/24" other_config:exclude_ips="10.0.0.1"` give some cidr and exclude_ip config for net-1 switch.
-- `ovn-nbctl lsp-add net-1 vm1` create a virtual port 
-- `ovn-nbctl lsp-set-addresses vm1 "00:00:00:00:01:01 10.0.0.10"` set mac and ip address for vm1 port
+- `ovn-nbctl ls-add net-1` Just creating logical which with `ovn-nbctl ls-add net-1` (ls-add mean logical-switch add) and the switch name is net-1,we can verify with `ovn-sbctl ls-list`
+- `ovn-nbctl set logical_switch net-1 other_config:subnet="10.0.0.0/24" other_config:exclude_ips="10.0.0.1"` Give some cidr and exclude_ip config for net-1 switch.
+- `ovn-nbctl lsp-add net-1 vm1` Create a virtual port 
+- `ovn-nbctl lsp-set-addresses vm1 "00:00:00:00:01:01 10.0.0.10"` Set mac and ip address for vm1 port
 
-- `ovn-nbctl lsp-add net-1 vm2` create a virtual port for vm2
-- `ovn-nbctl lsp-set-addresses vm2 "00:00:00:00:01:02 10.0.0.20"` set mac and ip address for vm2 port
+- `ovn-nbctl lsp-add net-1 vm2` Create a virtual port for vm2
+- `ovn-nbctl lsp-set-addresses vm2 "00:00:00:00:01:02 10.0.0.20"` Set mac and ip address for vm2 port
 
 you can verify with `ovn-nbctl lsp-list net-1`
 
