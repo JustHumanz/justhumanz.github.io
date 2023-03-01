@@ -2,7 +2,7 @@
 layout: post
 title:  "Playing with ovn part 1"
 categories: sdn,network
-image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/1902ab1c-b36f-4856-a99a-a95bae41658b.JPG
+image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/Kano_one.png
 ---
 OVN or Open Virtual Network is one of openswitch project.
 
