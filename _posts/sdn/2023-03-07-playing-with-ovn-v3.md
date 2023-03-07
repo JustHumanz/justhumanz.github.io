@@ -129,4 +129,8 @@ Connection to 192.168.100.1 8118 port [tcp/*] succeeded!
 ╰──➤ nc -lp 8118                   
 ```
 
-from vm2 to my laptop also fine
+from vm2 to my laptop also fine.
+
+
+
+all steps from part 1 until part 3 already on [my github](https://github.com/JustHumanz/OpenvSwitch-dojo),if you have some question you can open a issues 
