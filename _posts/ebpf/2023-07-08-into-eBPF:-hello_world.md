@@ -224,12 +224,7 @@ in this line nothing special,only importing lib
 struct minimal_bpf *skel;
 int err;
 ```
-first thing is declare create a struct from minimal_bpf and name it 
-
-```c
-cskel
-```
-(skel is acronym for skeleton)
+first thing is declare create a struct from minimal_bpf and name it `cskel` (skel is acronym for skeleton)
 
 
 ```c
