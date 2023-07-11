@@ -25,7 +25,7 @@ Tcpdump create a sandboxed virtual machine in kernel so what ever change in user
 We already get the core of black magic bpf, now just image the sandboxed virtual machine not for filtering packet but for syscall,hardware,event,etc  
 In sort, if you a programmer or have expriance with programming ebpf is just like javascript in browser.
 
-Since it running on top of sandboxed virtual machine in kernel ofcourse there a verification layer who check the code so the ebpf not breaking the kernel.
+Since it running on top of sandboxed virtual machine in kernel of course there a verification layer who check the code so the ebpf not breaking the kernel.
 
 eBPF programm it's self running on two space,one is on user-space and another in kernel-space
 
@@ -116,14 +116,14 @@ was global variable who will contain pid of ebpf app.
 ```c
 SEC("tp/syscalls/sys_enter_write")
 ``` 
-function it's self is like [1]attaching/selecting types where relevant and the ELF section names supported by libbpf
+function it's self is like attaching/selecting types where relevant and the ELF section names supported by libbpf[1]
 
 ![2.png](../../assets/img/ebpf/2.png)
 
 ```c
 int pid = bpf_get_current_pid_tgid() >> 32;
 ``` 
-the variable `pid` will contain of [2]current event pid and tgid 
+the variable `pid` will contain of current event pid and tgid[2]
 
 ![3.png](../../assets/img/ebpf/3.png)
 
