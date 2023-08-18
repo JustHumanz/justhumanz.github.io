@@ -22,8 +22,8 @@ And the answer is ....
 
 Tcpdump create a sandboxed virtual machine in kernel so what ever change in user space the kernel space can easly change it (i would recommend you to read full of [packet filtering](https://www.tcpdump.org/papers/bpf-usenix93.pdf))
 
-We already get the core of black magic bpf, now just image the sandboxed virtual machine not for filtering packet but for syscall,hardware,event,etc  
-In sort, if you a programmer or have expriance with programming ebpf is just like javascript in browser.
+We already get the core of black magic bpf, now just imaging the sandboxed virtual machine not for filtering packet but for syscall,hardware,event,etc  
+In sort, if you a dev or have expriance with programming, ebpf is just like javascript in browser.
 
 Since it running on top of sandboxed virtual machine in kernel of course there a verification layer who check the code so the ebpf not breaking the kernel.
 
