@@ -154,13 +154,14 @@ and from another point is networking nowdays not only for connecting one/more co
 
 that make sense since iptables was created 20 years ago and didn't not design it to have thousand rule also iptabels was working with hook method in each tables and what they cost to jump from one tables to another tables? yes cpu time
 
-![nf-hooks-iptables1](https://thermalcircle.de/lib/exe/fetch.php?media=linux:nf-hooks-iptables1.png)
+![nf-hooks-iptables1](https://thermalcircle.de/lib/exe/fetch.php?media=linux:nf-hooks-iptables1.png)  
+[Nftables - Packet flow and Netfilter hooks in detail](https://thermalcircle.de/doku.php?id=blog:linux:nftables_packet_flow_netfilter_hooks_detail)
 
-and the last is from [cloudflare](https://cloudflare.com).
 
+and the last is research from [cloudflare](https://cloudflare.com).  
 they do [research with filtering package(droping the package)](https://blog.cloudflare.com/how-to-drop-10-million-packets/) and the result
 
-![xdp](https://blog.cloudflare.com/content/images/2018/07/numbers-xdp-1.png)
+![xdp](https://blog.cloudflare.com/content/images/2018/07/numbers-xdp-1.png)  
 
 xdp won with crazy gap between another package filter.
 
@@ -186,75 +187,11 @@ the offloaded is kinda new mode, the offloaded is load&run the bpf program at NI
 ### Let's code
 sorry i talk to much about this one, now let's start the code, in here let's try to create a simple filtering udp pkt with dst port 2525
 
-<details>
-  <summary>Magic C code</summary>
-
-```c
-#include <linux/bpf.h>
-#include <bpf/bpf_helpers.h>
-#include <linux/if_ether.h>
-#include <linux/ip.h>
-#include <linux/udp.h>
-#include <bpf/bpf_endian.h>
-
-#define IPPROTO_UDP 17
-
-char _license[] SEC("license") = "GPL";
-
-SEC("xdp_udp")
-int xdp(struct xdp_md *ctx)
-{
-    __u32 nh_off = 0;
-
-    // Read data
-    void* data_end = (void*)(long)ctx->data_end;
-    void* data = (void*)(long)ctx->data;
-
-    // Handle data as an ethernet frame header
-    struct ethhdr *eth = data;
-
-    // Check frame header size
-    nh_off = sizeof(*eth);
-    if (data + nh_off > data_end) {
-        return XDP_PASS;
-    }
-
-    // Check protocol
-    if (eth->h_proto != bpf_htons(ETH_P_IP)) {
-        return XDP_PASS;
-    }
-
-    // Check packet header size
-    struct iphdr *iph = data + nh_off;
-    nh_off += sizeof(struct iphdr);
-    if (data + nh_off > data_end) {
-        return XDP_PASS;
-    }
-
-    // Check tcp header size
-    struct udphdr *udph = data + nh_off;
-    nh_off += sizeof(struct udphdr);
-    if (data + nh_off > data_end) {
-        return XDP_PASS;
-    }    
-
-    if (iph->protocol == IPPROTO_UDP) {
-        if (bpf_ntohs(udph->dest) == 2525) {
-            bpf_printk("Drop udp pkt, src addr %lu dst port %lu\n",iph->saddr,bpf_ntohs(udph->dest));
-            return XDP_DROP;
-        }
-
-    }            
-
-    return XDP_PASS;
-}
-```
-  
-</details>
+[Magic C code](https://github.com/JustHumanz/ebpf-dojo/blob/master/xdp/drop_udp.c)
 
 ```bash
-clang -O2 -target bpf -g -c udp_drop_xdp.c -o udp_drop_xdp.o
-ip link set dev enp3s0 xdpgeneric obj udp_drop_xdp.o sec xdp_udp
+clang -O2 -target bpf -g -c drop_udp.c -o drop_udp.o
+ip link set dev enp3s0 xdpgeneric obj drop_udp.o sec xdp_udp
 cat /sys/kernel/debug/tracing/trace_pipe
 ```
 
@@ -264,6 +201,9 @@ clinet
 ```bash
 ╭─[403] as humanz in /mnt/Data/ebpf
 ╰──➤ nc -w3 -uv 200.0.0.50 2525
+ls
+id
+idd
 ```
 
 server
