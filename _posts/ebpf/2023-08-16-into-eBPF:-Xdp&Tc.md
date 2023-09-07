@@ -9,16 +9,12 @@ This is was part three or maybe will be last part of eBPF topic in my blog, on t
 
 Before we start how ebpf works on level network, it would be better if we understand how linux handle network first
 
-<details>
-  <summary>Important Rule</summary>
-  Let's pretend where we don't have hundred or thousand of cpu/ram
-  
-  ![optimization_software](../../assets/img/ebpf/optimization_software.jpeg)
+## Important Rule
+Let's pretend where we don't have hundred or thousand of cpu/ram
 
-</details>
+![optimization_software](../../assets/img/ebpf/optimization_software.jpeg)
 
 ## Linux Networking Stack
-
 ![big no](https://media.tenor.com/VyugKLEBolsAAAAC/bocchi-bocchi-the-rock.gif)
 
 NO, NO NO NO i don't want to explain it to you, you can read it by your self on this [book](https://www.beej.us/guide/bgnet/html/split/), understanding about linux networking stack can be crucial for this topic 
