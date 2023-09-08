@@ -138,7 +138,7 @@ this all make sense why tcpdump was very efficient to filtering network package
 
 ![old man](https://media.licdn.com/dms/image/C5612AQHMDBtydj6oUQ/article-cover_image-shrink_600_2000/0/1586539766890?e=2147483647&v=beta&t=mbtq2XjMNC3cKbf8BdPUSb1-z7BLGw1Fn-u1U7F87BA)
 
-yes, **servers nowday can have powerfull resource** but remember one thing **our client can have it too** not only client with hungry request but the count of client can double, remember if nowday many product of `smart` device? yep that our client too or even your toaster can send a request to server
+yes, **servers nowday can have powerfull resource** but nowdays everthing was use internet and from freezer until a toaster and make the request more huge.
 
 and from another point is networking nowdays not only for connecting one/more compute/bare metal to another compute/bare, networking nowdays can be happen inside the compute/bare it's self (i.e: container/vm via veth) and that network requer network filtering.
 
@@ -193,7 +193,7 @@ cat /sys/kernel/debug/tracing/trace_pipe
 
 Now let's try with nc
 
-clinet
+client
 ```bash
 ╭─[403] as humanz in /mnt/Data/ebpf
 ╰──➤ nc -w3 -uv 200.0.0.50 2525
@@ -214,7 +214,7 @@ root@ubuntu-nested-5:/home/humanz/xdp_drop# cat /sys/kernel/debug/tracing/trace_
 
 as you can see the package was getting dropped, the intreasting is if we dump the network package with tcpdump the trafict isn't showing any udp pkt
 
-clinet
+client
 ```bash
 ╭─[403] as humanz in /mnt/Data/ebpf
 ╰──➤ nc -w3 -uv 200.0.0.50 2525
