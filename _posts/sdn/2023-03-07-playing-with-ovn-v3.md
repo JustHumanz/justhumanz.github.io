@@ -2,7 +2,7 @@
 layout: post
 title:  "Playing with ovn part 3"
 categories: sdn,network
-image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/Kano_three.png
+image: https://storage.humanz.moe/humanz-blog/Kano_three.png
 ---
 In this last post i will explain to create the snat&dnat or a.k.a floating ip,just like previous post let create the topology fist
 

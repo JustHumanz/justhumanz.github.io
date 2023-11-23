@@ -2,7 +2,7 @@
 layout: post
 title:  "Deep Dive Kubernetes: Network"
 categories: kubernetes,container,network
-image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/photo_2023-01-09_21-31-06.jpg
+image: https://storage.humanz.moe/humanz-blog/photo_2023-01-09_21-31-06.jpg
 ---
 This was the third part from my journey to learn kubernetes at this time i'm will write about kubernetes networking.
 

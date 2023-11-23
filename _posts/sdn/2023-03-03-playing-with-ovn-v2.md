@@ -2,7 +2,7 @@
 layout: post
 title:  "Playing with ovn part 2"
 categories: sdn,network
-image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/Kano_two.png
+image: https://storage.humanz.moe/humanz-blog/Kano_two.png
 ---
 In my last post i'm was trying to connecting two vm with same network but diffrent host,in this post i'm will trying to connecting two vm with diffrent network and diffrent host.
 

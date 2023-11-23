@@ -2,7 +2,7 @@
 layout: post
 title:  "Mimicking public cloud loadbalancer with nginx"
 categories: nginx,dynamic,lua,public cloud
-image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/89431767_p0.jpg
+image: https://storage.humanz.moe/humanz-blog/89431767_p0.jpg
 ---
 In my last post i was talking about ingress from kubernetes,one flow from ingress make me more curious, how can nginx-ingress updating the upstream with zero down time? if you ever setting up nginx with upstream and want to update the upstream you should restart/reload the nginx right? but in this case i don't see if nginx-ingress reload the nginx service also some public cloud have their load balancer with dynamic upstream (?) i'm don't very know their lb works on L3 or L7 but i'm pretty sure if they have L3 and L7 LB.
 

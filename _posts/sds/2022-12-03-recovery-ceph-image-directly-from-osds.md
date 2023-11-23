@@ -2,7 +2,7 @@
 layout: post
 title:  "Recovery ceph image directly from osds"
 categories: sds,storage,ceph
-image: https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/ee/8c/51/ee8c5176-96f5-4fd9-0bf0-b27acdb578d6/859758963255_cover.jpg/5000x5000bb.jpg
+image: https://storage.humanz.moe/humanz-blog/mklntic_cover.jpg
 ---
 
 ## Note

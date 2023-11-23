@@ -2,7 +2,7 @@
 layout: post
 title:  "Create a sniffer to detect kominfo blocker v2"
 categories: c,kominfo,block
-image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/MKLNtic.png
+image: https://storage.humanz.moe/humanz-blog/MKLNtic.png
 ---
 This post was part 2 of my article.
 

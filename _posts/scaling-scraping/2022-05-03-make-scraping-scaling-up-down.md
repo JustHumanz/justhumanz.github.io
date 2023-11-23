@@ -2,7 +2,6 @@
 layout: post
 title:  "Start scaling up your scaping"
 categories: tips,web scraper,data mining
-image: https://yt3.ggpht.com/BH7kBsAp-zu-NPGPuEr8YsP3-ZR5XtVKmQe8b0aEU_vEtc0SpuGMQerG9_D7XrDgkpj4CkAbcgM=s800-c-k-c0x00ffffff-no-rj
 ---
 
 Last time my problem was limitation from other resource,but after success to solve it i face new problem again.

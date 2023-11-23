@@ -2,7 +2,7 @@
 layout: post
 title:  "Create cni plugin from scratch with go part 3"
 categories: kubernetes,network,go
-image: https://eu2.contabostorage.com/0e2368a5b4d643d3a152a41a1a5eb0dc:kano/FE42T_IWUAELTxR.jpeg
+image: https://storage.humanz.moe/humanz-blog/FE42T_IWUAELTxR.jpeg
 ---
 This is will be the last part of **Create cni plugin from scratch with go**.
 
