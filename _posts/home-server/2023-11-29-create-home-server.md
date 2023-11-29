@@ -218,3 +218,5 @@ All config done now i can access my local service from internet with ssh tunnel.
 This image was hostinged in my local service
 
 ![Kano](https://storage.humanz.moe/humanz-blog/93388198_p0.jpg) 
+
+Or another example is you can downlaod this [playlist](https://music.humanz.moe/share/FFYF7_TU/Kano%20-%20Discography.m3u) and open it with vlc, all music in that playlist was hosted in my local service
