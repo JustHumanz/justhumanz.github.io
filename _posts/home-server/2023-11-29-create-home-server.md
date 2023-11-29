@@ -133,6 +133,7 @@ In my vps
 
 In my regular laptop
 - `nano /etc/systemd/system/tunnel_minio.service`
+
 ```
 [Unit]
 Description=MinIO sshtunnel
@@ -147,7 +148,9 @@ ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o StrictHostKeyChecking=no
 [Install]
 WantedBy=multi-user.target
 ```
+
 - `nano /etc/systemd/system/tunnel_filebrowser.service`
+
 ```
 [Unit]
 Description=filebrowser sshtunnel
@@ -162,6 +165,7 @@ ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o StrictHostKeyChecking=no
 [Install]
 WantedBy=multi-user.target
 ```
+
 - `systemctl daemon-reload`
 - `systemctl enable --now tunnel_minio.service tunnel_filebrowser.service`
 
@@ -205,6 +209,7 @@ if there listen port then the tunnel already created
     .........
     ...........
 ```
+
 - `systemctl restart openresty.service`
 
 All config done now i can access my local service from internet with ssh tunnel.
