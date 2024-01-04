@@ -9,42 +9,7 @@ Hello all, it's already long time not write a article. today i'm will talk about
 The reason i build this home server is simple, so currently i have two laptop gaming (one is mine and another is from my office) and one regular laptop and i want to play some game in both laptop but yeahh i was too lazy to copy it and i think it's not efficient since when the game getting updated i need to recopy the update to another laptop.
 
 ## Topology
-```
-       Internet
-        xxxxxx
-      xx      xx
- xxxxx          xx
- x             xxx
- xx  x          xx
-xxx  xxx  xx     x ◄─────┐
-x     xx   xx xx x       │
-x   xxxx   x    xx       │
-xxxx   xx xx             │
-        xxx              │
-                         │
-                         │
-                         │
-                         │
-                         │              ┌────┐
-                 ┌───────┴──────┐       │HDD │
-                 │172.16.18.1/24│       ├────┘
-                 │ Regular      │◄──────┤
-                 │ Laptop as    │       ├────┐
-                 │ server       │       │HDD │
-                 └──────────────┘       └────┘
-                         ▲
-                         │
-                    ┌────┴──┐
-           ┌───────►│ Switch│◄────────────┐
-           │        └───────┘             │
-           │                              │
-           │                              │
-           │                              │
-    ┌──────┴────────┐                ┌────┴───────┐
-    │172.16.18.10/24│                │172.16.18.20│
-    │Laptop 1       │                │Laptop 2    │
-    └───────────────┘                └────────────┘
-```
+![topology](../../assets/img/home_server/topo_1.png)
 
 
 ## Hardware
@@ -106,24 +71,7 @@ buttttt i just realize if i don't have any ip public, i forget if my provider do
 i got some answer from my problem, some tools/service like ddns or cloudflare tunnel but those tools was need to install some agent into my machine and i didn't want it. and yeah SSH is only the tools what i need
 
 ### Service Topology
-```bash
-
-   xxxxxx  xxxxxxx                                                                      ┌─────────────────────────────────────┐
-  xx     xx      x                                                                      │                                     │
-  x             xx                              ┌─────────────────────────┐             │                      ┌────────────┐ │
-  xx          xxx                               │                         │             │                      │Filebrowser │ │
-   x            xxx x                           │  ┌─────┐                │             │  ┌──────────────┐◄───┴────────────┘ │
-  xxx                xx xx──────────────────────┼──┤Nginx│   ┌─────────┐◄─┼─────────────┼──┤ssh_tunnel svc│                   │
- xx                      x                      │  └─────┘   │Localhost│  │             │┌►└──────────────┘◄──┬───────┐       │
- xx  xx             x    x                      │            └─────────┴──┼─────────────┼┘                    │ MinIO │       │
-  xxxxx         x   xxxxxx                      │          VPS            │             │                     └───────┘       │
-       x       xxx   x                          └─────────────────────────┘             │           My regular laptop         │
-        xx    xx x   x                                                                  └─────────────────────────────────────┘
-          xx xx  x   x
-            xx    x xx
-                  xxx
-        Internet
-```
+![topology](../../assets/img/home_server/topo_2.png)
 
 So here the topology, first i need a VPS for the ip public and after that i create a ssh tunnel service to forward my packet from my local regular laptop to my vps and after that my nginx will handle it with reverse proxy.
 
@@ -143,7 +91,7 @@ After=network.target
 Restart=always
 RestartSec=5
 Restart=always
-ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o StrictHostKeyChecking=no -R 9000:127.0.0.1:9000 tunnel@<IP ADDR>
+ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -R 9000:127.0.0.1:9000 tunnel@<IP ADDR>
 
 [Install]
 WantedBy=multi-user.target
@@ -160,7 +108,7 @@ After=network.target
 Restart=always
 RestartSec=5
 Restart=always
-ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o StrictHostKeyChecking=no -R 8000:127.0.0.1:8000 tunnel@<IP ADDR>
+ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -R 8000:127.0.0.1:8000 tunnel@<IP ADDR>
 
 [Install]
 WantedBy=multi-user.target
@@ -219,4 +167,4 @@ This image was hostinged in my local service
 
 ![Kano](https://storage.humanz.moe/humanz-blog/93388198_p0.jpg) 
 
-Or another example is you can downlaod this [playlist](https://music.humanz.moe/share/FFYF7_TU/Kano%20-%20Discography.m3u) and open it with vlc, all music in that playlist was hosted in my local service
+Or another example is you can downlaod this [playlist](https://music.humanz.moe/share/TWY9HoT-/Kano%20-%20Discography.m3u) and open it with vlc, all music in that playlist was hosted in my local service
