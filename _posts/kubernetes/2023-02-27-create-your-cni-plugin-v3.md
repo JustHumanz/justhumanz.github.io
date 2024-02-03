@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Create cni plugin from scratch with go part 3"
-categories: kubernetes,network,go
+categories: kubernetes network go infrastructure
 image: https://storage.humanz.moe/humanz-blog/FE42T_IWUAELTxR.jpeg
+img_path: ../../assets/img/kubernetes/
 ---
 This is will be the last part of **Create cni plugin from scratch with go**.
 

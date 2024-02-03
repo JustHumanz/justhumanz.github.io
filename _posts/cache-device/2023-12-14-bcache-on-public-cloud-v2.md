@@ -1,15 +1,16 @@
 ---
 layout: post
 title:  "Improving IOPS in public cloud and reduce cost with bcache V2"
-categories: tips,storage,infrastructure,public cloud
+categories: tips storage infrastructure public_cloud
 image: https://storage.humanz.moe/humanz-blog/106158760_p0.jpg
+img_path: ../../assets/img/Public_cloud
 ---
 Actually i'm already created this post in past but at that post i admit it if i didn't explain it clearly just showing some config then fio test also i didn't show the result of Cost optimization, so yeah at this time i will retest it and explain it more details.
 
 
 my main motive to create this was because of this [paper](https://ieeexplore.ieee.org/abstract/document/9644017)
 
-![paper](../../assets/img/Public_cloud/Aws/EBS/1.png)
+![paper](Aws/EBS/1.png)
 
 in that abstract its was writen **"technique outperforms Linux bcache by up to 3.35 times within specified cost constraints"** but sadly i didn't have the full pdf of paper.
 
@@ -162,15 +163,15 @@ a little explanation:
 ### Result
 
 IOPS  
-![IOPS](../../assets/img/Public_cloud/Aws/EBS/chart.png)  
+![IOPS](Aws/EBS/chart.png)  
 *More higher more better*
 
 Throughput  
-![throughput](../../assets/img/Public_cloud/Aws/EBS/chart%20(1).png)  
+![throughput](Aws/EBS/chart%20(1).png)  
 *More higher more better*
 
 Latency  
-![lat](../../assets/img/Public_cloud/Aws/EBS/chart%20(2).png)  
+![lat](Aws/EBS/chart%20(2).png)  
 *More lower more better*
 
 And the result was bcache really can improve the Random Write IOPS(?) tbh i don't expect about this one, bcache won even against the cache device it's self, well yeah the read was not really improve since we use `writeback`

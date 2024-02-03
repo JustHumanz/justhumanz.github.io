@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  "Start scaling up your scaping"
-categories: tips,web scraper,data mining
+categories: tips web_scraper data_mining
+img_path: ../../assets/img/scale_scraping
 ---
 
 Last time my problem was limitation from other resource,but after success to solve it i face new problem again.
@@ -92,11 +93,11 @@ first i create 2d array with length of total count units/nodes then create the `
 
 Three, Check the result
 
-![1.png](../../assets/img/scale_scraping/1.png)     
+![1.png](/1.png)     
 
 Now each units/nodes have UUID for identify and each units/nodes have diffrent payload.
 
 ### PoC
-![2.png](../../assets/img/scale_scraping/2.png)     
+![2.png](/2.png)     
 
 in twitter it's was 9:21 and 9:26 already send it into discord

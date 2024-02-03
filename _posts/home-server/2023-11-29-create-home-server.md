@@ -1,25 +1,26 @@
 ---
 layout: post
 title:  "Creating home server"
-categories: nfs,home server,minio
+categories: nfs home_server minio
 image: https://storage.humanz.moe/humanz-blog/93388198_p0.jpg
+img_path: ../../assets/img/home_server/
 ---
 
 Hello all, it's already long time not write a article. today i'm will talk about my new home server who i built a few days ago  
 The reason i build this home server is simple, so currently i have two laptop gaming (one is mine and another is from my office) and one regular laptop and i want to play some game in both laptop but yeahh i was too lazy to copy it and i think it's not efficient since when the game getting updated i need to recopy the update to another laptop.
 
 ## Topology
-![topology](../../assets/img/home_server/topo_1.png)
+![topology](topo_1.png)
 
 
 ## Hardware
 
-![switch](../../assets/img/home_server/hw_1.png)
+![switch](hw_1.png)
 
 
 For switch i use TP-LINK TL-SG105 5 Port with 1000Mbps
 
-![Ethernet Adapter](../../assets/img/home_server/hw_2.png)
+![Ethernet Adapter](hw_2.png)
 
 And since my regular laptop dosen't have ethernet port i need the coverter which is support 1000Mbps and additional usb adapter
 
@@ -71,7 +72,7 @@ buttttt i just realize if i don't have any ip public, i forget if my provider do
 i got some answer from my problem, some tools/service like ddns or cloudflare tunnel but those tools was need to install some agent into my machine and i didn't want it. and yeah SSH is only the tools what i need
 
 ### Service Topology
-![topology](../../assets/img/home_server/topo_2.png)
+![topology](topo_2.png)
 
 So here the topology, first i need a VPS for the ip public and after that i create a ssh tunnel service to forward my packet from my local regular laptop to my vps and after that my nginx will handle it with reverse proxy.
 
@@ -108,7 +109,9 @@ After=network.target
 Restart=always
 RestartSec=5
 Restart=always
-ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -R 8000:127.0.0.1:8000 tunnel@<IP ADDR>
+ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o StrictHostKeyChecking=no -o ls
+
+ -R 8000:127.0.0.1:8000 tunnel@<IP ADDR>
 
 [Install]
 WantedBy=multi-user.target
@@ -167,4 +170,4 @@ This image was hostinged in my local service
 
 ![Kano](https://storage.humanz.moe/humanz-blog/93388198_p0.jpg) 
 
-Or another example is you can downlaod this [playlist](https://music.humanz.moe/share/TWY9HoT-/Kano%20-%20Discography.m3u) and open it with vlc, all music in that playlist was hosted in my local service
+Or another example is you can downlaod this [playlist](https://music.humanz.moe/share/TWY9HoT-/Kano%20-%20Discography.m3u) and open it with vlc, all music in that playlist was hosted in my local service"

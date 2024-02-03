@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Deep Dive Kubernetes: Network"
-categories: kubernetes,container,network
+categories: kubernetes container network infrastructure
 image: https://storage.humanz.moe/humanz-blog/photo_2023-01-09_21-31-06.jpg
+img_path: ../../assets/img/kubernetes/
 ---
 This was the third part from my journey to learn kubernetes at this time i'm will write about kubernetes networking.
 
@@ -19,7 +20,7 @@ a Cloud Native Computing Foundation project, consists of a specification and lib
 
 from that statement CNI is responsible to create/assign ip into container, but for better understanding we can see this image or you can read it on [kubernetes blog](https://kubernetes.io/blog/2017/11/containerd-container-runtime-options-kubernetes/) 
 
-![1.png](../../assets/img/kubernetes/network/1.png)
+![1.png](network/1.png)
 
 
 for the CNI i'm will use calico with IP-IP tunnel config (the default)
@@ -145,7 +146,7 @@ blackhole 100.100.77.64/26 proto bird
 
 and yes we found the pods ip,let's trace it 
 
-![2.png](../../assets/img/kubernetes/network/2.png)
+![2.png](network/2.png)
 
 as you can see `caliafd5b487983` device was linked into `nginx-deployment-65d96bbbbf-ztbh8` pods.
 
@@ -174,12 +175,12 @@ let's read the manual first
 
 In [kube doc](https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service),Cluster IP was *Virtual IP addressing*
 
-![3.png](../../assets/img/kubernetes/network/3.png)
+![3.png](network/3.png)
 
 
 Still in [kube doc](https://kubernetes.io/docs/reference/networking/virtual-ips) it's just says *virtual IP*,lmao
 
-![4.png](../../assets/img/kubernetes/network/4.png)
+![4.png](network/4.png)
 
 let's deep dive this *virtual IP*.
 
@@ -236,13 +237,13 @@ the magic behind all of this was....... **iptables**
 
 if you read the doc completely you may not surprised, let see again the doc
 
-![5.png](../../assets/img/kubernetes/network/5.png)
+![5.png](network/5.png)
 
 in kube doc that was write clearly **iptables rule might get created**
 
 now let's check the rule
 
-![6.png](../../assets/img/kubernetes/network/6.png)
+![6.png](network/6.png)
 
 i hope you'r not skipping the iptables class, anyway fist ip get the table nat and grep the Cluster IP after that you can see if chain *KUBE-SVC-BLABLABLA* was have Cluster IP and from *KUBE-SVC-BLABLABLA* was referenced to *KUBE-SEP-BLABLA* chain
 
@@ -296,12 +297,12 @@ right loadbalancer the answer,but once again how it's work?
 
 let's see the basic information from the [metallb website](https://v0-3-0--metallb.netlify.app/concepts/)
 
-![7.png](../../assets/img/kubernetes/network/7.png)
+![7.png](network/7.png)
 
 from here we know if metallb have two function,one is to allocate the ip addr and another one is expose the ip addr for loadbalancer
 
 
-![8.png](../../assets/img/kubernetes/network/8.png)
+![8.png](network/8.png)
 
 here was little bit intreasing,metallb say if the ip was "lives" also "one machine in the cluster takes ownership of the service IPs" and the last "machine simply has multiple IP addresses"  what that all meaning?
 
@@ -441,7 +442,7 @@ that because the pods who running nginx was in ubuntu-nested-2,just like metallb
 
 the simply answer is,metallb fools the icmp package.let dump the network and see what acctualy happen
 
-![9.png](../../assets/img/kubernetes/network/9.png)
+![9.png](network/9.png)
 
 as you can see the tcpdump only showing **ICMP echo request** whitout any response that happen because the ip address(200.0.0.101) was fake,that ip was ever exist in first place.
 
@@ -455,7 +456,7 @@ remember the ip 200.0.0.101 was fake right? but keep in mind the request package
 Ingress basically just web server(nginx,httpd,traefik) for kubernetes.
 
 
-![10.png](../../assets/img/kubernetes/network/10.png)
+![10.png](network/10.png)
 
 See,that all function just like nginx in your vps
 
@@ -522,33 +523,33 @@ As you can see when i do curl to default domain the result was **Kano/鹿乃** a
 
 Now let's try to check what is inside of nginx-ingress
 
-![11.png](../../assets/img/kubernetes/network/11.png)
+![11.png](network/11.png)
 
 
 Fist let's try to open&understand `nginx.conf`
 
-![12.png](../../assets/img/kubernetes/network/12.png)
+![12.png](network/12.png)
 
 So in this config nginx using lua script to generate logging,balancer,cert,etc
 
 
-![13.png](../../assets/img/kubernetes/network/13.png)
+![13.png](network/13.png)
 
 In here nginx just call and init the lua script
 
-![14.png](../../assets/img/kubernetes/network/14.png)
+![14.png](network/14.png)
 
 On `upstream_balancer` block nginx trying do call balancer.balance() func from lua script
 
-![15.png](../../assets/img/kubernetes/network/15.png)
+![15.png](network/15.png)
 
 And from here was the nginx server block started,as you can see the server_name was same like `host` in Ingress yaml
 
-![16.png](../../assets/img/kubernetes/network/16.png)
+![16.png](network/16.png)
 
 And the last line of this server block is rewrite the path,basicly just removing the `/kano` from url request
 
-![17.png](../../assets/img/kubernetes/network/17.png)
+![17.png](network/17.png)
 
 And here was the last line of nginx config,as you can see the last line of nginx config was filled by nginx configuration (?) and that block only listen on localhost, now let's try to curl `/configuration`
 
@@ -559,7 +560,7 @@ Not found!
 
 Hemm it's failed,i wonder why? let's read the **configuration.call()** func
 
-![19.png](../../assets/img/kubernetes/network/19.png)
+![19.png](network/19.png)
 
 from .call() we can see if this function will call another function from the url request
 

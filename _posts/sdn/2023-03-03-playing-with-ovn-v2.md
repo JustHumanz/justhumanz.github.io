@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Playing with ovn part 2"
-categories: sdn,network
+categories: sdn network infrastructure
 image: https://storage.humanz.moe/humanz-blog/Kano_two.png
+img_path: ../../assets/img/sdn/
 ---
 In my last post i'm was trying to connecting two vm with same network but diffrent host,in this post i'm will trying to connecting two vm with diffrent network and diffrent host.
 
@@ -16,7 +17,7 @@ Just like usualy it's will better if i'm make the topology first.
 - 2 Compute 
 - 2 Client
 
-![topo-v2.png](../../assets/img/sdn/topo-v2.png)
+![topo-v2.png](topo-v2.png)
 
 red : physical network  
 blue : overlay network  
@@ -117,7 +118,7 @@ Check the config, as you can see the port net1-router1 was created on both logic
 
 Here was a example illustration :
 
-![3.png](../../assets/img/sdn/3.png)
+![3.png](3.png)
 
 Now let's continue to create dhcp and create the vm.
 

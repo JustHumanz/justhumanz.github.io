@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Into eBPF: Hello World"
-categories: c,ebpf
+categories: c ebpf 
 image: https://storage.humanz.moe/humanz-blog/5Ht_7PxB7LM.jpg
+img_path: ../../assets/img/ebpf
 ---
 hello folks, finally i have motivation to write a post again (yay) after a loooong time have identity crisis.
 
@@ -18,7 +19,7 @@ In example if you add iptables rule to drop icmp in your linux the tcpdump still
 
 And the answer is ....
 
-![1.png](../../assets/img/ebpf/1.png)
+![1.png](1.png)
 
 Tcpdump create a sandboxed virtual machine in kernel so what ever change in user space the kernel space can easly change it (i would recommend you to read full of [packet filtering](https://www.tcpdump.org/papers/bpf-usenix93.pdf))
 
@@ -118,14 +119,14 @@ SEC("tp/syscalls/sys_enter_write")
 ``` 
 function it's self is like attaching/selecting types where relevant and the ELF section names supported by libbpf[1]
 
-![2.png](../../assets/img/ebpf/2.png)
+![2.png](2.png)
 
 ```c
 int pid = bpf_get_current_pid_tgid() >> 32;
 ``` 
 the variable `pid` will contain of current event pid and tgid[2]
 
-![3.png](../../assets/img/ebpf/3.png)
+![3.png](3.png)
 
 and the last is if else conditional, if the current event pid was not same with my_pid variable the ebpf will return 0 which is the ebpf will not print the `BPF triggered from PID bla bla bla`
 

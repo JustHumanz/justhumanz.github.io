@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Playing with ovn part 3"
-categories: sdn,network
+categories: sdn network infrastructure
 image: https://storage.humanz.moe/humanz-blog/Kano_three.png
+img_path: ../../assets/img/sdn/
 ---
 In this last post i will explain to create the snat&dnat or a.k.a floating ip,just like previous post let create the topology fist
 
@@ -13,7 +14,7 @@ In this last post i will explain to create the snat&dnat or a.k.a floating ip,ju
 - 2 Compute 
 - 2 Client
 
-![topo-v3.png](../../assets/img/sdn/topo-v3.png)
+![topo-v3.png](topo-v3.png)
 
 red : physical network  
 blue : overlay network  

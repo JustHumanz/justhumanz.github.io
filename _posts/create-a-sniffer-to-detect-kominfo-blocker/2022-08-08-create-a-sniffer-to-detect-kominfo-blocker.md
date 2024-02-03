@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Create a sniffer to detect kominfo blocker"
-categories: c,kominfo,block
-image: https://storage.humanz.moe/FZWPp1GVsAAfJa1.jpg
+categories: c kominfo bypass
+image: https://storage.humanz.moe/humanz-blog/FZWPp1GVsAAfJa1.jpg
+img_path: ../../assets/img/komintol
 ---
 Hello all,long time to see.i'm litle bit busy with my rl stuff.
 
@@ -11,7 +12,7 @@ So yeah this time i will write about kominfo blocker,it's maybe litle bit late b
 Kominfo start blocking website at 30-31 july at this point i don't really care about this blocking mombo jumbo because it's not effect me at all also i can bypass it like open a jar, but at some point i was intrested with this bloking because some isp was using **Deep Packet Inspection**[1] or DPI, yes DPI it's not dns level anymore it's already next level if i'm not worng russia and china use this DPI too.
 
 ### Capturing the network package
-![1.png](../../assets/img/komintol/1.png)
+![1.png](1.png)
 
 As you can see in wireshark it can be seen that this packages has rst flag,well rst means the connections from server was suddenly cut or terminated due network error or server error[2].
 

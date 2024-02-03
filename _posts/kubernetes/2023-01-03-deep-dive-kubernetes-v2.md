@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Deep Dive Kubernetes: Pods"
-categories: kubernetes,container,pods,pause
+categories: kubernetes container pods infrastructure
 image: https://storage.humanz.moe/humanz-blog/EuK5lVxVkAArNo0.jpeg
+img_path: ../../assets/img/kubernetes/
 ---
 In my previous i talk about **container** now time to level up,yep from this post i will talk about kubernetes or k8s but the perfective still same with the title i will talk on low level of kubernetes, so if you come here to learning about istio,service mash,cicd or another mumbo jumbo i think you on worng train mate
 
@@ -17,7 +18,7 @@ i don't know why kubernetes not write about pause container, but let's try to fi
 
 gladly i'm found some blog from [Ian Matthew Lewis](https://www.ianlewis.org/en/almighty-pause-container) who write about pause container  
 
-![1.png](../../assets/img/kubernetes/pods/1.png)
+![1.png](pods/1.png)
 
 In that article says if pause container was a **parrent container** and have two resposibilities, one is linux namespaces sharing and another one is server as PID 1 for pods
 
@@ -69,37 +70,37 @@ EOF
 ```
 let create the pods
 
-![2.png](../../assets/img/kubernetes/pods/2.png)
+![2.png](pods/2.png)
 
 now the pods was running,let's take a look into container id  
 
-![3.png](../../assets/img/kubernetes/pods/3.png)
+![3.png](pods/3.png)
 
 if i describe the pods kubernetes only tell you the container is one but let's have check into ubuntu-nested-3
 
-![4.png](../../assets/img/kubernetes/pods/4.png)
+![4.png](pods/4.png)
 
 ok i'm found the container,let's check in details
 
-![5.png](../../assets/img/kubernetes/pods/5.png)
+![5.png](pods/5.png)
 
 from this pic i think/should you already get the point of pause container or not? but sure let me explain 
 
 first,the sandbox-id is have uniq uid it's like container id let's check it
 
-![6.png](../../assets/img/kubernetes/pods/6.png)
+![6.png](pods/6.png)
 
 and bingooo,that was pause container
 
-![7.png](../../assets/img/kubernetes/pods/7.png)
+![7.png](pods/7.png)
 
 the diffrent only in network namespaces,let's check via ip netns
 
-![8.png](../../assets/img/kubernetes/pods/8.png)
+![8.png](pods/8.png)
 
 the output was pid 44929 which is that pid was attached in alpine container
 
-![9.png](../../assets/img/kubernetes/pods/9.png)
+![9.png](pods/9.png)
 
 here was the summary of pause container
 
@@ -113,21 +114,21 @@ if something happen with the 'real' container (ie: crash,exit non zero,etc) the 
 ```
 
 ### Another way
-![10.png](../../assets/img/kubernetes/pods/10.png)
+![10.png](pods/10.png)
 
 you can search the process by using pause container id and pstree it 
 
 as you can see the containerd runtime use pause container id as primary container not the alpine container 
 
 ### PoC
-![11.png](../../assets/img/kubernetes/pods/11.png)
+![11.png](pods/11.png)
 
 so in here i was trying to kill alpine container and the kubernetes will recreate the alpine container but because the ip configuration was done by pause and alpine container just attach it so the ip address was not changing 
 
 ## Multiple container at one pod(sidecar)
 In theory you can have multiple container on 1 pods
 
-![12.png](../../assets/img/kubernetes/pods/12.png)
+![12.png](pods/12.png)
 
 And same like the pause container,the resource was shared between container
 
@@ -211,15 +212,15 @@ EOF
 
 create nginx container with logging sidecar
 
-![13.png](../../assets/img/kubernetes/pods/13.png)
+![13.png](pods/13.png)
 
 for example if you create multiple container the ready status will same like your container 
 
-![14.png](../../assets/img/kubernetes/pods/14.png)
+![14.png](pods/14.png)
 
 the containers ID have two diffrent id
 
-![15.png](../../assets/img/kubernetes/pods/15.png)
+![15.png](pods/15.png)
 
 from namespace they have same pid and same mount point 
 
@@ -232,50 +233,50 @@ in example you can define if one container was request 256MB memory to kube schd
 Now the question is,how kubernetes limit the container?
 
 
-![16.png](../../assets/img/kubernetes/pods/16.png)
+![16.png](pods/16.png)
 
 in [kubernetes docs](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) they say if kubernetes use cgroup
 
-![17.png](../../assets/img/kubernetes/pods/17.png)
+![17.png](pods/17.png)
 
 from [arch wiki](https://wiki.archlinux.org/title/cgroups) **(i use arch btw)** it's says **feature provided by the Linux kernel to manage, restrict, and audit groups of processes** 
 
 so cgroup is like frontend of kernel resource limitation (?) , anyway let's cek how cgroup do limitiaton on container
 
 
-![18.png](../../assets/img/kubernetes/pods/18.png)
+![18.png](pods/18.png)
 
 first let's get the container id and inspect it and get the cgroupPath
 
-![19.png](../../assets/img/kubernetes/pods/19.png)
+![19.png](pods/19.png)
 
 as you can see, in cgroupPath many stored config file (?) 
 
-![20.png](../../assets/img/kubernetes/pods/20.png)
+![20.png](pods/20.png)
 
 One of file was named **memory.limit_in_bytes** and the value is **104857600** but if i divided it with 1024/1024 the result was 100,same like the memory limit.
 
-![21.png](../../assets/img/kubernetes/pods/21.png)
+![21.png](pods/21.png)
 
 One things i notice is there no one config file for `request` resource,  
 i thought `memory.soft_limit_in_bytes` was the request config file but it's not
 
-![22.png](../../assets/img/kubernetes/pods/22.png)
+![22.png](pods/22.png)
 
 And i just realized if the `request` paremeter was not soft limit, request parameter was only used for kube-schdule **The memory request is mainly used during (Kubernetes) Pod scheduling**
 
 ### PoC
 let's create OOM in container
 
-![23.png](../../assets/img/kubernetes/pods/23.png)
+![23.png](pods/23.png)
 
 install gcc for running the memory stress
 
-![24.png](../../assets/img/kubernetes/pods/24.png)
+![24.png](pods/24.png)
 
 compile it and we ready to go
 
-![25.png](../../assets/img/kubernetes/pods/25.png)
+![25.png](pods/25.png)
 
 before run the mem stress exec `dmesg -w` in ubuntu-nested-3 and then run the mem stress
 

@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Recovery ceph image directly from osds"
-categories: sds,storage,ceph
+categories: sds storage ceph infrastructure
 image: https://storage.humanz.moe/humanz-blog/mklntic_cover.jpg
+img_path: ../../assets/img/sds/
 ---
 
 ## Note
@@ -19,19 +20,19 @@ after the accident i was thingking, if we can bring back the ceph-mon from osds 
 ## Experiment 0x0
 i create a simple ceph image (with ext4 filesystem) then dump the object (through rbd) after that concat all object into one file
 
-![1.png](../../assets/img/sds/1.png)     
+![1.png](1.png)     
 
 now let's mount and fill the image
 
-![2.png](../../assets/img/sds/2.png)     
+![2.png](2.png)     
 
 and the last,let's try dump the object & concat all object into one file
 
-![3.png](../../assets/img/sds/3.png)     
+![3.png](3.png)     
 
 the result was ........
 
-![4.png](../../assets/img/sds/4.png)     
+![4.png](4.png)     
 
 of course failed
 
@@ -41,11 +42,11 @@ honesty i'm stuck at this step for 1-2 weeks, i'm already review the [ceph expor
 
 sadly his repo was already gone 
 
-![mengsedih](../../assets/img/sds/5.png)     
+![mengsedih](5.png)     
 
 at least he explain why you cannot concating all object into one file
 
-![6.png](../../assets/img/sds/6.png)     
+![6.png](6.png)     
 
 still at this time i'm not very clear what the meaning of that answer 
 
@@ -55,12 +56,12 @@ after first experiment was fail i'm keep trying to search info for recovery ceph
 
 now let's review the script
 
-![7.png](../../assets/img/sds/7.png)     
+![7.png](7.png)     
 
 the first things is you should know the default object size (the default was 4MB) and then the image size, for the rebuild_block_size i will explain it later
 
 
-![8.png](../../assets/img/sds/8.png)    
+![8.png](8.png)    
 
 red : create the ceph image with `seek` same as ceph image size 
 
@@ -72,31 +73,31 @@ white : the formula, so here the formula object size will multiple by object nam
 
 [512 was value from sector sizes](https://wiki.archlinux.org/title/Advanced_Format),512 was the default size 
 
-![9.png](../../assets/img/sds/9.png)    
+![9.png](9.png)    
 
-![10.png](../../assets/img/sds/10.png)    
+![10.png](10.png)    
 
 so that all was clear and like [kryptur](https://unix.stackexchange.com/users/206630/kryptur) say i was worng in **block size**
 
 ## Experiment 0x2
 now let's start with new script
 
-![11.png](../../assets/img/sds/11.png)    
+![11.png](11.png)    
 
 first i create new dir & move all objet into that dir
 
-![12.png](../../assets/img/sds/12.png)    
+![12.png](12.png)    
 
 then i run the script where i already modify 
 
 and the result was .....
 
 
-![13.png](../../assets/img/sds/13.png)    
+![13.png](13.png)    
 
 the filesystem can be read and all files was available
 
-![14.png](../../assets/img/sds/14.png)    
+![14.png](14.png)    
 
 
 and yesssss we i can concat ceph object it into file system with correct way, but only that? i think we missing something
@@ -109,19 +110,19 @@ from ceph doc it self you can use [ceph-objectstore-tool](https://docs.ceph.com/
 
 before use that tools make sure if you osds was in down/off state
 
-![15.png](../../assets/img/sds/15.png)    
+![15.png](15.png)    
 
 first you need to find the ceph image header
 
-![16.png](../../assets/img/sds/16.png)    
+![16.png](16.png)    
 
 if you already get it cek the omap(object map) list
 
-![17.png](../../assets/img/sds/17.png)    
+![17.png](17.png)    
 
 as you can see the list was same like `rbd info` from here you need take the size 
 
-![18.png](../../assets/img/sds/18.png)    
+![18.png](18.png)    
 
 when you get the value of size you need to decode it,use python will be ezpz
 
@@ -129,22 +130,22 @@ when you get the value of size you need to decode it,use python will be ezpz
 
 ofc dumping all object from all osds
 
-![19.png](../../assets/img/sds/19.png)    
+![19.png](19.png)    
 
 *i dump it twice because i only have two osds in this host&rack*
 
 same like before you need to concat all object into one file system
 
-![20.png](../../assets/img/sds/20.png)    
+![20.png](20.png)    
 
 and the result was ...
 
-![21.png](../../assets/img/sds/21.png)    
+![21.png](21.png)    
 
 
 open it with feh
 
-![22.png](../../assets/img/sds/22.png)    
+![22.png](22.png)    
 
 
 

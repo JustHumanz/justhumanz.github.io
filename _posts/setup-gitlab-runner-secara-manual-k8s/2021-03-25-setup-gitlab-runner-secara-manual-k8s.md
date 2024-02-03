@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Setup gitlab runner secara manual di k8s"
-categories: cicd,gitlab,k8s,devops
+categories: cicd gitlab kubernetes devops infrastructure
 ---
 ## Setup gitlab runner secara manual di k8s
 <p align="center">
