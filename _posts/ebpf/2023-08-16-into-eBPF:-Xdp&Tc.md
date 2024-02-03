@@ -168,7 +168,7 @@ let's read the document(real man always read the document)
 ![6.png](6.png)
 
 the [doc](https://prototype-kernel.readthedocs.io/en/latest/networking/XDP/introduction.html) says if xdp was **processing at lowest point** and it's come before **SKB**  
-tl;dr [SKB or socket buffer](http://vger.kernel.org/~davem/skb.html) is the most fundamental data structure in the Linux networking code. Every packet sent or received is handled using this data structure.
+tl;dr [SKB or socket buffer](https://vger.kernel.org/~davem/skb.html) is the most fundamental data structure in the Linux networking code. Every packet sent or received is handled using this data structure.
 
 but how xdp do this? modify the hw drivers? or the hw need to be special?
 

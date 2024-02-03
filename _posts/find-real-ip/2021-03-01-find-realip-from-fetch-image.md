@@ -5,7 +5,7 @@ categories: tips security
 ---
 ## Find real ip address from fetch image
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JustHumanz/jekyll-klise/master/assets/img/Humanz/Nyanpasuu.jpg"/>
+  <img alt="hello" src="https://raw.githubusercontent.com/JustHumanz/jekyll-klise/master/assets/img/Humanz/Nyanpasuu.jpg"/>
   Nyanpasuu
 </p>
 hallo kali ini saya akan memberikan sedikit `tips` untuk mencari real ip yang dihide oleh cloudflare,well seperti yang kita tahu bawa cloudflare akan menghide real ip address dan menggantinya dengan ip address milik cloudflare.  

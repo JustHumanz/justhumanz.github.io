@@ -5,7 +5,7 @@ categories: cicd gitlab kubernetes devops infrastructure
 ---
 ## Setup gitlab runner secara manual di k8s
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JustHumanz/jekyll-klise/master/assets/img/Humanz/Nyanpasuu.jpg"/>
+  <img alt="hello" src="https://raw.githubusercontent.com/JustHumanz/jekyll-klise/master/assets/img/Humanz/Nyanpasuu.jpg"/>
   Nyanpasuu
 </p>
 Setup gitlab runner secara manual di k8s,seperti judulnya kali ini saya akan membahas cara setup runner secara manual,tapi kenapa manual? 
