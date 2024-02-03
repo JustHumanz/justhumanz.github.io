@@ -1,14 +1,15 @@
 ---
 layout: post
 title:  "Create cni plugin from scratch with go part 1"
-categories: kubernetes,network,go
+categories: kubernetes network go infrastructure
 image: https://storage.humanz.moe/humanz-blog/FnDQZKLaEAEH2mc.jpeg
+img_path: ../../assets/img/kubernetes/
 ---
 CNI or Container Network Interface is one of componect requerment to running kubernetes cluster,CNI is responsibility to connected kubernetes cluster ie: connection between pods,connection between pods with diffrent node.
 
 Usualy if you using public cloud the CNI already configurated (not very sure,i'm never use public cloud #cmiiw)
 
-![1.png](../../assets/img/kubernetes/cni/1.png)
+![1.png](cni/1.png)
 
 I'm pretty sure if you was using one of [those CNI](https://github.com/containernetworking/cni#3rd-party-plugins)
 
@@ -17,7 +18,7 @@ I'm pretty sure if you was using one of [those CNI](https://github.com/container
 But in this time i'm will not talk/compare/benchmark about those CNI (compare/benchmark without knowing the basic of technology was dumb and waste your time), yep just like usually i will talk how to create it from scratch.
 
 Before we jump to the code better if we know what is standar of kubernetes network model  
-![2.png](../../assets/img/kubernetes/cni/2.png)
+![2.png](cni/2.png)
 
 As you can see kubernetes network model need two requerments
 
@@ -50,7 +51,7 @@ the cni plugin config file was formated in json and in that file was filled with
 
 populate that plugin on all kubernetes cluster but with different subnet
 
-![3.png](../../assets/img/kubernetes/cni/3.png)
+![3.png](cni/3.png)
 
 
 ## Create cni plugin
@@ -67,7 +68,7 @@ tail -f /var/log/humanz_cni.log
 
 meanwhile tail the log let create a pods
 
-![4.png](../../assets/img/kubernetes/cni/4.png)
+![4.png](cni/4.png)
 
 As you can see the pod was created, now let's try to ping it
 

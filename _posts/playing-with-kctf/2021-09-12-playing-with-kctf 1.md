@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  "Playing with kctf,secure and scalable infrastructure for ctf competition 1"
-categories: security,ctf
+categories: security ctf infrastructure
+img_path: ../../assets/img/kctf/
 ---
 
 kctf atau singkatan dari kubernetes-ctf adalah sebuah tools orchestration untuk ctf infrastruktur,kctf sendiri di rintis oleh [google project](https://github.com/google/kctf)  
@@ -85,7 +86,7 @@ untuk PoC berbentuk video sudah pernah saya buat di [fb](https://web.facebook.co
     tunggu beberapa menit,karena kctf sedang membuild image,kalau sudah forward portnya biar bisa diakses
     ```kctf chal debug port-forward --local-port 2525```  
     langsung buka ae port 2525 di lokal  
-    ![1.png](../../assets/img/kctf/1.png)     
+    ![1.png](1.png)     
     disana kelihatan kalau kerenel yang dipake adalah `NSJAIL`
 
 7. check kctf

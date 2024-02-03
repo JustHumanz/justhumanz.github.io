@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Into eBPF: XDP&TC"
-categories: c,ebpf
-published: true
+categories: c ebpf
 image: https://storage.humanz.moe/humanz-blog/110714050_p0.jpg
+img_path: ../../assets/img/ebpf
 ---
 This is was part three or maybe will be last part of eBPF topic in my blog, on this i will talk about XDP or eXpress Data Path and Traffic Controll, well yeah many people know or see how powerfull eBPF on networking level since the popular product of eBPF is calium who made significant improve on mesh service.
 
@@ -12,7 +12,7 @@ Before we start how ebpf works on level network, it would be better if we unders
 ## Important Rule
 Let's pretend where we don't have hundred or thousand of cpu/ram
 
-![optimization_software](../../assets/img/ebpf/optimization_software.jpeg)
+![optimization_software](optimization_software.jpeg)
 
 ## Linux Networking Stack
 ![big no](https://media.tenor.com/VyugKLEBolsAAAAC/bocchi-bocchi-the-rock.gif)
@@ -88,7 +88,7 @@ Once again, if you already read the full paper you should know it.
 
 They create a **bytecode virtual machine(register-based virtual machine) in kernel** and yes they create the cpu Instructions
 
-![Instructions](../../assets/img/ebpf/5.png)
+![Instructions](5.png)
 
 This is why tcpdump can have dynamic filtering package on kernel level, because they create their own cpu Instructions, here the example
 
@@ -144,7 +144,7 @@ and from another point is networking nowdays not only for connecting one/more co
 
 ### iptables, our lovely tools 
 
-![iptables](../../assets/img/ebpf/old_iptables.jpeg)
+![iptables](old_iptables.jpeg)
 
 [*Over the years, iptables has been a blessing and a curse: a blessing for its flexibility and quick fixes. A curse during times debugging a 5K rules iptables setup in an environment where multiple system components are fighting over who gets to install what iptables rules.*](https://cilium.io/blog/2018/04/17/why-is-the-kernel-community-replacing-iptables/)
 
@@ -165,7 +165,7 @@ but once again, why this can be happen? what is XDP make more special than anoth
 
 let's read the document(real man always read the document)
 
-![6.png](../../assets/img/ebpf/6.png)
+![6.png](6.png)
 
 the [doc](https://prototype-kernel.readthedocs.io/en/latest/networking/XDP/introduction.html) says if xdp was **processing at lowest point** and it's come before **SKB**  
 tl;dr [SKB or socket buffer](http://vger.kernel.org/~davem/skb.html) is the most fundamental data structure in the Linux networking code. Every packet sent or received is handled using this data structure.
@@ -175,7 +175,7 @@ but how xdp do this? modify the hw drivers? or the hw need to be special?
 *well yes but actually no*   
 so xdp have 3 mode, Generic,Native,Offloaded. each mode have different workflows
 
-![7.png](../../assets/img/ebpf/7.png)  
+![7.png](7.png)  
 [lpc2018-xdp-tutorial](https://lpc.events/event/2/contributions/71/attachments/17/9/presentation-lpc2018-xdp-tutorial.pdf)
 
 the offloaded is kinda new mode, the offloaded is load&run the bpf program at NIC driver it's self, usualy smartNIC can do this

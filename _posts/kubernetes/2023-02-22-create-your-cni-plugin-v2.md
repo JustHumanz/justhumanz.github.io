@@ -1,30 +1,31 @@
 ---
 layout: post
 title:  "Create cni plugin from scratch with go part 2"
-categories: kubernetes,network,go
+categories: kubernetes network go infrastructure
 image: https://storage.humanz.moe/humanz-blog/FP5jGEtaMAQZXXY.jpeg
+img_path: ../../assets/img/kubernetes/
 ---
 Before we jump into the code better if we understanding what is CNI or procedure to create CNI plugin.
 
-![2.png](../../assets/img/kubernetes/cni/5.png)
+![2.png](cni/5.png)
 
 Since i'm using v0.3.1 so we go to [v0.3.1 tag](https://github.com/containernetworking/cni/blob/spec-v0.3.1/SPEC.md)
 
 
 
-![3.png](../../assets/img/kubernetes/cni/6.png)
+![3.png](cni/6.png)
 
 In sort,cni plugin was who responsible to give the container IP addresss and connecti it to kube cluster.
 
-![4.png](../../assets/img/kubernetes/cni/7.png)
+![4.png](cni/7.png)
 
 CNI give the plugin parameters when kubernetes trying to create/delete the container, for now keep in mind this parameter
 
-![5.png](../../assets/img/kubernetes/cni/8.png)
+![5.png](cni/8.png)
 
 If we scroll a little bit it's will say *executable using the following environment variables* so it will be like `humanz@root#CNI_COMMAND=bla bla CNI_CONTAINERID=bla bla CNI_NETNS=bla ./cni-plugin` and then the cni plugin will get the data from env
 
-![6.png](../../assets/img/kubernetes/cni/9.png)
+![6.png](cni/9.png)
 
 In network configuration it's describe show to make the config it's self,remember in part one i'm was putting **10-humanz-cni-plugin.conf** in **/etc/cni/net.d/** ? yes that was the network configuration.
 

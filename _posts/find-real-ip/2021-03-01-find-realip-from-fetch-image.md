@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Find real ip address from fetch image"
-categories: tips,security
+categories: tips security
 ---
 ## Find real ip address from fetch image
 <p align="center">

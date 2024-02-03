@@ -1,18 +1,19 @@
 ---
 layout: post
 title:  "Mimicking public cloud loadbalancer with nginx"
-categories: nginx,dynamic,lua,public cloud
+categories: nginx infrastructure lua public_cloud
 image: https://storage.humanz.moe/humanz-blog/89431767_p0.jpg
+img_path: ../../assets/img/nginx/
 ---
 In my last post i was talking about ingress from kubernetes,one flow from ingress make me more curious, how can nginx-ingress updating the upstream with zero down time? if you ever setting up nginx with upstream and want to update the upstream you should restart/reload the nginx right? but in this case i don't see if nginx-ingress reload the nginx service also some public cloud have their load balancer with dynamic upstream (?) i'm don't very know their lb works on L3 or L7 but i'm pretty sure if they have L3 and L7 LB.
 
-![1.png](../../assets/img/nginx/1.png)
+![1.png](1.png)
 
 From nginx-ingress [doc](https://kubernetes.github.io/ingress-nginx/developer-guide/code-overview/#ingress-nginx-lua-scripts) they say if nginx-ingress use lua-script for endpoint handling
 
 After googling i'm found [OpenResty](https://openresty.org/en/) who focust to build nginx-lua
 
-![2.png](../../assets/img/nginx/2.png)
+![2.png](2.png)
 
 Now i'm already get the map,let's start our adventure.
 ### Installing
@@ -22,12 +23,12 @@ Now i'm already get the map,let's start our adventure.
 - `apt install openresty`
 - `systemctl stop openresty.service`
 
-![3.png](../../assets/img/nginx/3.png)
+![3.png](3.png)
 
 I'm found the [module](https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/balancer.md) who have function to setting up upstream dynamicly 
 
 
-![4.png](../../assets/img/nginx/4.png)
+![4.png](4.png)
 
 Here was the [example code](https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/balancer.md#http-subsystem),from this we can modify it
 

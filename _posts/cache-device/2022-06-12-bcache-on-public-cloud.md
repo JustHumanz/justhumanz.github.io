@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Improving IOPS in public cloud and reduce cost with bcache"
-categories: tips,storage,infrastructure,public cloud
+categories: tips storage infrastructure public_cloud
 image: https://storage.humanz.moe/humanz-blog/FVCrqRmUYAAESUq.jpg
+img_path: ../../assets/img/bcache
 ---
 in my previous post i talk about `A block layer cache aka Bcache` and after that i realize, can bcache **Improving IOPS and reduce the cost at same time** ?
 

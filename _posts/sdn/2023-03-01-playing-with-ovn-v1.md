@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Playing with ovn part 1"
-categories: sdn,network
+categories: sdn network infrastructure
 image: https://storage.humanz.moe/humanz-blog/Kano_one.png
+img_path: ../../assets/img/sdn/
 ---
 OVN or Open Virtual Network is one of openswitch project.
 
@@ -16,7 +17,7 @@ before we start playing about OVN better if we create a simple network topology.
 - 2 Compute 
 - 2 client
 
-![1.png](../../assets/img/sdn/1.png)
+![1.png](1.png)
 
 red : physical network  
 blue : overlay network

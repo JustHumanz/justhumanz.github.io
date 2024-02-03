@@ -1,14 +1,15 @@
 ---
 layout: post
 title:  "Into eBPF: Using SEC"
-categories: c,ebpf
+categories: c ebpf
 image: https://storage.humanz.moe/humanz-blog/MKLNtic_ebpf.webp
+img_path: ../../assets/img/ebpf
 ---
 hello folks, welcome back to my blog.
 
 this is was part two from my previous post if you have't read it pls read it first, In this part i will focust on how to using `SEC` or more like how we can use `SEC` func in ebpf code,just like i metion the previous post the `SEC` fuction it's self is like attaching/selecting types where relevant and the ELF section names supported by libbpf[1]
 
-![2.png](../../assets/img/ebpf/2.png)
+![2.png](2.png)
 
 
 but now the question is, how we get the parameter `"tp/syscalls/sys_enter_write"` and what we can use from that syscalls.
@@ -227,7 +228,7 @@ make
 echo kano # see the trace_pipe
 ```
 
-![4.png](../../assets/img/ebpf/4.png)
+![4.png](4.png)
 
 As you can see when we user `echo` or even `python` to print "kano" string the ebpf will triggerd 
 
