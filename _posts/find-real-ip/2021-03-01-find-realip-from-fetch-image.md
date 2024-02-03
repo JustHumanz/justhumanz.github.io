@@ -11,7 +11,7 @@ categories: tips security
 hallo kali ini saya akan memberikan sedikit `tips` untuk mencari real ip yang dihide oleh cloudflare,well seperti yang kita tahu bawa cloudflare akan menghide real ip address dan menggantinya dengan ip address milik cloudflare.  
 
 
-Hal pertama yang harus ada adalah target memiliki fitur `fetch image` dan yang kedua harus memiliki `web service`,ok langsung ke contohnya  
+Hal pertama yang harus ada adalah target memiliki fitur `fetch image` dan yang kedua harus memiliki `web service`,ok langsung ke contohnya   
 
 Sebagai contoh disini saya akan memakain `danbooru.donmai.us` sebagai target.  
 ![danbooru.donmai.us using cloudflare](https://raw.githubusercontent.com/JustHumanz/jekyll-klise/master/assets/img/Humanz/danbooru-cloudflare.png)
