@@ -275,13 +275,13 @@ I’ll explain some parameters from this config, the **type** is “centralized�
 
 ok let's start with sniff the interface from **ubuntu-kube-3** since the pod&vm was there.
 
-[![asciicast](https://asciinema.org/a/vXaWxHaGNqRJQRr0LtUxIiEUc.svg)](https://asciinema.org/a/vXaWxHaGNqRJQRr0LtUxIiEUc)
+[![asciicast](https://asciinema.humanz.moe/a/QcxUWl7ojKg8tU0QnqHLBkbFS.svg)](https://asciinema.humanz.moe/a/QcxUWl7ojKg8tU0QnqHLBkbFS)
 
 From that terminal record we can see if the secondary nic was not sniffed any icmp traffic even the pod&vm was on there, how can this happen? 
 
 now let's move into **ubuntu-kube-1**
 
-[![asciicast](https://asciinema.org/a/iQad7wRfQVpzqgcMoEITWK80k.svg)](https://asciinema.org/a/iQad7wRfQVpzqgcMoEITWK80k)
+[![asciicast](https://asciinema.humanz.moe/a/i1ohWABMf4nEfu4v5wF9d8tW7.svg)](https://asciinema.humanz.moe/a/i1ohWABMf4nEfu4v5wF9d8tW7)
 
 ahaaaa there we go, so all trafic was going into **ubuntu-kube-1** then moveout to **ubuntu-kube-3**
 
@@ -300,17 +300,17 @@ all that process was happening in openflow unlike multus-cni or other cni who on
 
 Here the example of OpenFlow
 
-[![asciicast](https://asciinema.org/a/FGJqRDvGtMHCqA4ngjgkK7MSK.svg)](https://asciinema.org/a/FGJqRDvGtMHCqA4ngjgkK7MSK)
+[![asciicast](https://asciinema.humanz.moe/a/SBPAxYcQMjGbqm8G5tPAG8BVs.svg)](https://asciinema.humanz.moe/a/SBPAxYcQMjGbqm8G5tPAG8BVs)
 
-When i do ping into pod/vm the table **cookie=0xedf0c1d5, duration=19968.505s, table=12, n_packets=626, n_bytes=62737, idle_age=69, priority=100,ip,reg10=0/0x1,reg14=0x3,metadata=0x1,nw_dst=192.168.100.101 actions=ct(table=13,zone=NXM_NX_REG11[0..15],nat)** was increasing(see the n_bytes) and stop when ping was stoped.
+When i do ping into pod/vm the table **cookie=0xb0ec47a1, duration=471.084s, table=12, n_packets=78, n_bytes=7793, idle_age=0, priority=100,ip,reg10=0/0x1,reg14=0x3,metadata=0x1,nw_dst=192.168.100.101 actions=ct(table=13,zone=NXM_NX_REG11[0..15],nat)** was increasing(see the n_bytes) and stop when ping was stoped.
 
-also you can see the table **cookie=0xdc6aa9e0, duration=20849.169s, table=11, n_packets=25, n_bytes=1050, idle_age=954, priority=92,arp,reg14=0x3,metadata=0x1,arp_tpa=192.168.100.101** was increasing when i delete the arp then do ping (which is automatically send arp request too)
+also you can see the table **cookie=0x8b46db38, duration=487.598s, table=11, n_packets=8, n_bytes=336, idle_age=9, priority=92,arp,reg14=0x3,metadata=0x1,arp_tpa=192.168.100.101** was increasing when i delete the arp then do ping (which is automatically send arp request too)
 
 This is was one of example of how ovn running and doesn't need any another tools for bridge/tunnel/routing/natting.
 
 Ahh i almost forgot about the "centralized". so i choice **ubuntu-kube-1** as "centralized" and that make all natting/ingress/egress process was happening on there.
 
-[![asciicast](https://asciinema.org/a/5ie9rluMDLwfNHU9TUgGsx9zG.svg)](https://asciinema.org/a/5ie9rluMDLwfNHU9TUgGsx9zG)
+[![asciicast](https://asciinema.humanz.moe/a/4PQ5VH7J6CP0eb5UWJawvw3yz.svg)](https://asciinema.humanz.moe/a/4PQ5VH7J6CP0eb5UWJawvw3yz)
 
 here the example, i was ping eip/fip from **ubuntu-kube-2** into vm which is on **ubuntu-kube-3** and the result is OpenFlow on **ubuntu-kube-1** was increasing and because of that the latecy was diffrent when i ping the eip/fip and cni ip
 
