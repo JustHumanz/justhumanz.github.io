@@ -70,7 +70,7 @@ now let's check the nvidia profile
 
 ![mdevctl](9.png)
 
-that was the example if nvidia mdev profile very gpu type should have different profile (mine is nvidia A30), let me explain little bit.
+that was the example if nvidia mdev profile every gpu type should have different profile (mine is nvidia A30), let me explain little bit.
 
 on that pic bus id `0000:41:00.4` was have 9 type but the **Available instances: 1** only upon type **nvidia-688** that mean the nvidia type **nvidia-689/690/691** was not supported on this gpu (maybe cuz the driver? i'm not very know about this one) 
 
