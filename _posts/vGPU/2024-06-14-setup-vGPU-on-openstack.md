@@ -17,7 +17,7 @@ first, you need to know if your GPU support vgpu or not you can check it on nvid
 <details>
   <summary>A little tip</summary>
   
-    if you only have desktop gpu you can try https://gitlab.com/polloloco/vgpu-proxmox or if you already have datacenter gpu but not in grid-vgpu list try to change ge grid-vgpu version, nvidia sometimes drop the vgpu support in newer version (in my case nvidia A30 was drop the vgpu support on grid 16.0)
+    if you only have desktop gpu you can try https://gitlab.com/polloloco/vgpu-proxmox or if you already have datacenter gpu but not in grid-vgpu list try to change grid version, nvidia sometimes drop the vgpu support in newer version (in my case nvidia A30 was drop the vgpu support on grid 16.0)
     
 </details>
 
@@ -54,7 +54,7 @@ to verify if the iommu already enable or not you can check from kernel message
 
 now the iommu was running and next is config the nvidia vgpu and the last is config nova.
 
-secound, you need to enable nvidia SR-IOV.
+Second, you need to enable nvidia SR-IOV.
 
 ![nvidia-pci](7.png)
 
@@ -62,7 +62,7 @@ get the nvidia PCI address and make sure the kernel driver in use is nvidia (you
 
 ![nvidia-sr-iov](8.png)
 
-enable the VF on that PCI address.
+enable the VF on that PCI address(you can create a systemd service so you don't need exec manually it when compute reboot).
 
 you can check if the VF already created or not by see the kernel message `dmesg | grep iommu` or `lspci | grep NVIDIA`
 
