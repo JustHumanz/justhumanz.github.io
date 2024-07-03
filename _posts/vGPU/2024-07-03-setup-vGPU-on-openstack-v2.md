@@ -88,15 +88,15 @@ edit the nova config
 nano /etc/kolla/nova-compute/nova.conf
 ```
 
-![create_sriov](11.png)
+![edit_nova](11.png)
 
 also don't forget to restart the nova compute service
 
 and create vm then check it from vm 
 
-![create_sriov](12.png)
+![create_vm](12.png)
 
-![create_sriov](13.png)
+![check_gpu_vm](13.png)
 
 
 and that's all, thx
