@@ -286,6 +286,7 @@ done
 sekarang seharusnya ceph sudah health_ok, selanjutnya kita coba deploy si rgw untuk si s3nya
 
 - `nano rgw.ceph-s3.yaml`
+
 ```yaml
 service_type: rgw
 service_id: ceph-s3
@@ -301,6 +302,7 @@ spec:
   rgw_frontend_type: "beast"
   rgw_frontend_port: 8080
 ```
+
 - `ceph orch apply -i rgw.ceph-s3.yaml`
 - `ceph orch ps`  
 dan tunggu sampai service rgw.ceph-s3 up semua
