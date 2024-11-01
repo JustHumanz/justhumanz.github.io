@@ -1,15 +1,16 @@
 ---
 layout: post
 title:  "Tracing OpenvSwitch with eBPF"
-categories: c ebpf
+categories: c ebpf sdn network tracing
 image: https://storage.humanz.moe/humanz-blog/ai_to_ai.jpg
 img_path: ../../assets/img/ebpf/ovs/
 
 ---
 
-yo kiddo, do u ready to learn about eBPF? but this time it's not about eBPF but about openvswitch however let's tracing openvswitch with ebpf.
+yo kiddo, do u ready to learn about eBPF? but this time it's not about eBPF but about openvswitch, yep now we doing diehard let's tracing openvswitch with ebpf.
 
-let me show to u how powerfull is ebpf.
+let see how powerfull is ebpf.  
+
 
 but first let me show my cluster topology, 
 
@@ -25,18 +26,18 @@ let's move into the study case.
 
 
 ## Probset
-if you already experance with ovs in openstack or another cms(Cloud Management Service) you already relize if ovs was not just buch of connected port from vm/pod into big bridge then tunnel it into another node with vxlan or genev.
+if you already experance with ovs in openstack or another cms(Cloud Management Service) you already realize if ovs was not just buch of connected port from vm/pod into big bridge then tunnel it into another node with vxlan or genev.
 
 ![br-int](br-int.png)
 
-ovs have bridge interface called **br-int** or Integration Bridge, in this bridge all network flows was running. br-int it's not about routing but it's about all network functionality, when i say **all** yes it's all of network functionality like routing,natting,firewall,arp spoofing prevention,and much much more
+ovs have bridge interface called **br-int** or Integration Bridge, in this bridge all network flows was running. br-int isn't not about routing or firewall,but it's about all network functionality, when i say **all** yes it's all of network functionality like routing,natting,firewall,arp spoofing prevention,and much much more
 
-all of network functionality it's coming from [openflow](https://en.wikipedia.org/wiki/OpenFlow), you can see network flow in br-int with `ovs-ofctl dump-flows br-int`, from openflow we can create a network flow. i.e: "pod/vm-A was on same node with pod/vm-B so no need send the package into tunnel" or "pod/vm-A allow all icmp connection but not udp" or "pod/vm-B try to connect with pod/vm-C but pod/vm-C was not in this node, so let tunnel the request into another node who running pod/vm-C"
+all of network functionality it's coming from [openflow](https://en.wikipedia.org/wiki/OpenFlow), you can see network flow in br-int with `ovs-ofctl dump-flows br-int`, from openflow we can create a network flow. i.e: "pod/vm-A was same node with pod/vm-B so no need send the package into tunnel" or "pod/vm-A allow all icmp connection but not udp" or "pod/vm-B try to connect with pod/vm-C but pod/vm-C was not in this node, so let tunnel the request into another node who running pod/vm-C"
 
 ok that just intro, let's start the probset.
 
 
-it's just a simple question, **how we know if the network package was not intrupted or droped by openflow in br-int? or can we make sure if the package was sending into tunnel so another node can process it? **
+it's just a simple question, **how we know if the network package was not intrupted or droped by openflow in br-int? or can we make sure if the package was sending into tunnel so another node can process it?**
 
 ![br-int-probset](br-int-probset.png)
 
@@ -44,7 +45,7 @@ in theory we can Trace it with *dump-flows* and follow the table and wait until 
 
 
 ## ebpf
-over years I have been troubleshooting with *dump-flows,grep,watch,tcpdump* tbh that was quite painful, until i saw some question&answer in [stackoverflow](https://stackoverflow.com/questions/49737505/how-to-get-packet-processingpacket-in-flow-match-output-time-in-ovs-switch) and from that discussion make my head click.
+over years I have been troubleshooting with *dump-flows,grep,watch,tcpdump* tbh that was quite painful, until i saw some question&answer in [stackoverflow](https://stackoverflow.com/questions/49737505/how-to-get-packet-processingpacket-in-flow-match-output-time-in-ovs-switch) and from that discussion make my head click like a bulb.
 
 first let check the kernel avability for trace ovs
 ```bash
@@ -183,9 +184,11 @@ END
 }
 ```
 
+Run it
+
 [![asciicast](https://asciinema.humanz.moe/a/myh36uldO31mQKAlL4cXkCWQL.svg)](https://asciinema.humanz.moe/a/myh36uldO31mQKAlL4cXkCWQL)
 
-As you can see after i exec bpftrace and ping the icmp package was printed in bpftrace, *since vport* struct have [net_device struct](https://elixir.bootlin.com/linux/v6.11.5/source/net/openvswitch/vport.h#L75) let's try to find the interface name and filter it with src ip&dst ip
+As you can see after I exec bpftrace and ping the icmp package was printed in bpftrace, *since vport* struct have [net_device struct](https://elixir.bootlin.com/linux/v6.11.5/source/net/openvswitch/vport.h#L75) let's try to find the interface name and filter it with src ip&dst ip
 
 ```c
 /**
