@@ -14,7 +14,7 @@ ok bye bye.
 
 no no no ofc not, we are engineer right? we do calc and build some fancy tools to solve the problem right? yes we are. now let's solve this problem
 
-in ceph you [cannot change the ec profile](https://docs.redhat.com/en/documentation/red_hat_ceph_storage/3/html/storage_strategies_guide/erasure_code_pools#erasure_code_profiles) in example if you already create ec profile with k=2 m=1 and the faliure domain was host then you create pool above that ec profile then your pool ec was immutable. let's say in feature your cluster node has been increase so you need update the ec profile to make the pool more efficient and reliability or if you have pool with replication rule but at some point your company need to change it into erasure coding
+in ceph you [cannot change the ec profile](https://docs.redhat.com/en/documentation/red_hat_ceph_storage/3/html/storage_strategies_guide/erasure_code_pools#erasure_code_profiles) in example if you already create ec profile with k=2 m=1 and the faliure domain was host then you create pool above that ec profile then your pool ec was immutable. let's say in future your cluster node has been increase so you need update the ec profile to make the pool more efficient and reliability or if you have pool with replication rule but at some point your company need to change it into erasure coding
 
 For that case currently ceph not support those requirement but but [ceph support migration pool](https://docs.redhat.com/en/documentation/red_hat_ceph_storage/6/html/storage_strategies_guide/pools-overview_strategy#migrating-a-pool_strategy) however the Prerequisites was kinda red flag for some company i think
 
@@ -90,7 +90,7 @@ File update
           |                |        |                |                 
           +----------------+        +----------------+                           
 ```
-if the progress migrate already reach file4 but at that time file1 have some update from upstream in original pool that would make the file1 in migrate pool becomeing inconsistent.
+if the progress migrate already reach file4 but at that time file1 have some update from upstream in original pool that would make the file1 in migrate pool becoming inconsistent.
 
 
 
