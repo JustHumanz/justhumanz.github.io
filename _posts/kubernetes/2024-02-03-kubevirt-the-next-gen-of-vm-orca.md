@@ -2,7 +2,7 @@
 layout: post
 title:  "Kubevirt: The Next Gen Of VM Orchestration?"
 categories: kubernetes infrastructure 
-image: https://storage.humanz.moe/humanz-blog/F_XdW5wagAAM7V0.jpeg
+image: https://storage.humanz.moe/humanz-blog/20240916_164842.jpg
 img_path: ../../assets/img/kubernetes/
 ---
 [Kubevirt](https://kubevirt.io/) first time i hear it was from my friend [kuliserper](https://twitter.com/kuliserper) who brought this tools when he becoming speaker at [openinfra meetup 13](https://www.openinfra.id/portfolio/meetup-13/) but sadly i can't to see his presentation cuz at that time i'm not in jkt :'( .

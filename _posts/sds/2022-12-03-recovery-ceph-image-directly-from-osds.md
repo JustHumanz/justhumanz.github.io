@@ -2,7 +2,7 @@
 layout: post
 title:  "Recovery ceph image directly from osds"
 categories: sds storage ceph infrastructure
-image: https://storage.humanz.moe/humanz-blog/mklntic_cover.jpg
+image: https://storage.humanz.moe/humanz-blog/EMi9P6hUYAAYTlB.jpeg
 img_path: ../../assets/img/sds/
 ---
 

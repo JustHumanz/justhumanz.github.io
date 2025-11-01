@@ -2,7 +2,7 @@
 layout: post
 title:  "Create cni plugin from scratch with go part 2"
 categories: kubernetes network go infrastructure
-image: https://storage.humanz.moe/humanz-blog/FP5jGEtaMAQZXXY.jpeg
+image: https://storage.humanz.moe/humanz-blog/20250906_163050.jpg
 img_path: ../../assets/img/kubernetes/
 ---
 Before we jump into the code better if we understanding what is CNI or procedure to create CNI plugin.

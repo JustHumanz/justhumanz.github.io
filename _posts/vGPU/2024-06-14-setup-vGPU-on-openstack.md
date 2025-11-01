@@ -2,7 +2,7 @@
 layout: post
 title:  "Setup Nvidia vGPU on Openstack"
 categories: nvidia vGPU openstack
-image: https://storage.humanz.moe/humanz-blog/75c40aa35d0ff6191170655459f89a92bd42eea3_s2_n3_y1.png
+image: https://storage.humanz.moe/humanz-blog/FYBbtpAaUAAKnEW.jpeg
 img_path: ../../assets/img/vgpu
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "How to change pool erasure coding in ceph"
 categories: sds storage ceph infrastructure
-image: https://storage.humanz.moe/humanz-blog/GfiYi2GbUAAizjR.jpeg
+image: https://storage.humanz.moe/humanz-blog/EjelejdVkAE4LG0.jpeg
 ---
 Hello all, how ur doing? happy holiday and padoru padoru.
 

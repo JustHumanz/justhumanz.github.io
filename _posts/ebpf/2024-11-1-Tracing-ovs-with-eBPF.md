@@ -2,7 +2,7 @@
 layout: post
 title:  "Tracing OpenvSwitch with eBPF"
 categories: c ebpf sdn network tracing
-image: https://storage.humanz.moe/humanz-blog/ai_to_ai.jpg
+image: https://storage.humanz.moe/humanz-blog/20240913_111418.jpg
 img_path: ../../assets/img/ebpf/ovs/
 
 ---

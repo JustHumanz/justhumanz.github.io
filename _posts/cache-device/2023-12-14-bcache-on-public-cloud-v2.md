@@ -2,7 +2,7 @@
 layout: post
 title:  "Improving IOPS in public cloud and reduce cost with bcache V2"
 categories: tips storage infrastructure public_cloud
-image: https://storage.humanz.moe/humanz-blog/106158760_p0.jpg
+image: https://storage.humanz.moe/humanz-blog/GffkM_hboAAlsVm.jpeg
 img_path: ../../assets/img/Public_cloud
 ---
 Actually i'm already created this post in past but at that post i admit it if i didn't explain it clearly just showing some config then fio test also i didn't show the result of Cost optimization, so yeah at this time i will retest it and explain it more details.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Into eBPF: XDP&TC"
 categories: c ebpf
-image: https://storage.humanz.moe/humanz-blog/110714050_p0.jpg
+image: https://storage.humanz.moe/humanz-blog/20240913_134036.jpg
 img_path: ../../assets/img/ebpf
 ---
 This is was part three or maybe will be last part of eBPF topic in my blog, on this i will talk about XDP or eXpress Data Path and Traffic Controll, well yeah many people know or see how powerfull eBPF on networking level since the popular product of eBPF is calium who made significant improve on mesh service.

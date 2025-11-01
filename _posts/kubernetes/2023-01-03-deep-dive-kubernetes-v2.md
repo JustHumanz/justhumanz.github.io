@@ -2,7 +2,7 @@
 layout: post
 title:  "Deep Dive Kubernetes: Pods"
 categories: kubernetes container pods infrastructure
-image: https://storage.humanz.moe/humanz-blog/EuK5lVxVkAArNo0.jpeg
+image: https://storage.humanz.moe/humanz-blog/20240912_183946.jpg
 img_path: ../../assets/img/kubernetes/
 ---
 In my previous i talk about **container** now time to level up,yep from this post i will talk about kubernetes or k8s but the perfective still same with the title i will talk on low level of kubernetes, so if you come here to learning about istio,service mash,cicd or another mumbo jumbo i think you on worng train mate
