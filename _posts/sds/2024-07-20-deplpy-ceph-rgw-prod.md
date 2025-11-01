@@ -2,7 +2,7 @@
 layout: post
 title:  "Deploy Ceph Rgw with Production Grade"
 categories: sds storage ceph infrastructure s3
-image: https://storage.humanz.moe/humanz-blog/GSH3bbMaUAAjQYB.jpeg
+image: https://storage.humanz.moe/humanz-blog/Fd8k9hjUoAEp6ck.jpeg
 img_path: ../../assets/img/sds/ceph-rgw/
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Creating home server"
 categories: nfs home_server minio
-image: https://storage.humanz.moe/humanz-blog/93388198_p0.jpg
+image: https://storage.humanz.moe/humanz-blog/20240912_093319.jpg
 img_path: ../../assets/img/home_server/
 ---
 

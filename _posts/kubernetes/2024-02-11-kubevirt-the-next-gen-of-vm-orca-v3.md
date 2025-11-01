@@ -2,7 +2,7 @@
 layout: post
 title:  "Kubevirt: The Next Gen Of VM Orchestration? part 3"
 categories: kubernetes infrastructure 
-image: https://storage.humanz.moe/humanz-blog/4d491fdec21c47428c61abe501173cf2755c41c3_s2_n3_y1.png
+image: https://storage.humanz.moe/humanz-blog/20240915_183123.jpg
 img_path: ../../assets/img/kubernetes/
 ---
 jeng jeng jeng, it's time to part three or the last part for kubevirt in networking world.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Playing with ovn part 2"
 categories: sdn network infrastructure
-image: https://storage.humanz.moe/humanz-blog/Kano_two.png
+image: https://storage.humanz.moe/humanz-blog/two.jpg
 img_path: ../../assets/img/sdn/
 ---
 In my last post i'm was trying to connecting two vm with same network but diffrent host,in this post i'm will trying to connecting two vm with diffrent network and diffrent host.

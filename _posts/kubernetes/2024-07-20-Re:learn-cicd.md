@@ -2,7 +2,7 @@
 layout: post
 title:  "Re:Learn CICD"
 categories: kubernetes devops cicd argocd
-image: https://storage.humanz.moe/humanz-blog/GR0Qv8zacAcfnBx.jpeg
+image: https://storage.humanz.moe/humanz-blog/20240915_124247.jpg
 published: false
 ---
 

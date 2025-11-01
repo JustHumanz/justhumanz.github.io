@@ -2,7 +2,7 @@
 layout: post
 title:  "Into eBPF: Using SEC"
 categories: c ebpf
-image: https://storage.humanz.moe/humanz-blog/MKLNtic_ebpf.webp
+image: https://storage.humanz.moe/humanz-blog/20240917_142132.jpg
 img_path: ../../assets/img/ebpf
 ---
 hello folks, welcome back to my blog.

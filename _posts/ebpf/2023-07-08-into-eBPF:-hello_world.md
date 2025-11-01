@@ -2,7 +2,7 @@
 layout: post
 title:  "Into eBPF: Hello World"
 categories: c ebpf 
-image: https://storage.humanz.moe/humanz-blog/5Ht_7PxB7LM.jpg
+image: https://storage.humanz.moe/humanz-blog/20240917_173932.jpg
 img_path: ../../assets/img/ebpf
 ---
 hello folks, finally i have motivation to write a post again (yay) after a loooong time have identity crisis.

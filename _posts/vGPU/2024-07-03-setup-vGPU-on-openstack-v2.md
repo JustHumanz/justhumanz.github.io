@@ -2,7 +2,7 @@
 layout: post
 title:  "Setup Nvidia MIG vGPU on Openstack"
 categories: nvidia vGPU openstack
-image: https://storage.humanz.moe/humanz-blog/GQAwnlybEAAUkh1.jpeg
+image: https://storage.humanz.moe/humanz-blog/D7COChxUwAAO-1L.jpeg
 img_path: ../../assets/img/vgpu/mig/
 ---
 hello all welcome back to my blog, in my previous post I wrote about how to setup vgpu in openstack, and in this post, I'll explain to setup vgpu but with MIG configuration.

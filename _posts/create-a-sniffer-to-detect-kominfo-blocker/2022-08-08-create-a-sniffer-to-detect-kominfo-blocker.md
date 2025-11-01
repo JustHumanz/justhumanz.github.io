@@ -2,7 +2,7 @@
 layout: post
 title:  "Create a sniffer to detect kominfo blocker"
 categories: c kominfo bypass
-image: https://storage.humanz.moe/humanz-blog/FZWPp1GVsAAfJa1.jpg
+image: https://storage.humanz.moe/humanz-blog/rntszta6dpfa1.jpg
 img_path: ../../assets/img/komintol
 ---
 Hello all,long time to see.i'm litle bit busy with my rl stuff.

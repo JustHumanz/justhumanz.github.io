@@ -2,7 +2,7 @@
 layout: post
 title:  "Create cni plugin from scratch with go part 1"
 categories: kubernetes network go infrastructure
-image: https://storage.humanz.moe/humanz-blog/FnDQZKLaEAEH2mc.jpeg
+image: https://storage.humanz.moe/humanz-blog/20240917_203102.jpg
 img_path: ../../assets/img/kubernetes/
 ---
 CNI or Container Network Interface is one of componect requerment to running kubernetes cluster,CNI is responsibility to connected kubernetes cluster ie: connection between pods,connection between pods with diffrent node.

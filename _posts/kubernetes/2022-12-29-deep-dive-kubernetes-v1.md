@@ -2,7 +2,7 @@
 layout: post
 title:  "Deep Dive Kubernetes: Container"
 categories: kubernetes container runc infrastructure
-image: https://storage.humanz.moe/humanz-blog/103845644.png
+image: https://storage.humanz.moe/humanz-blog/20240913_192427.jpg
 img_path: ../../assets/img/kubernetes/
 ---
 

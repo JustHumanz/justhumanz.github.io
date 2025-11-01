@@ -2,7 +2,7 @@
 layout: post
 title:  "Create neutron from scratch"
 categories: sdn network infrastructure
-image: https://storage.humanz.moe/humanz-blog/FP5jE4YaIAgXPct.jpg
+image: https://storage.humanz.moe/humanz-blog/20240914_110022.jpg
 ---
 
 Neutron is one of openstack component that manage the networking in openstack(maybe another public) cloud, but how is actually work? or the correct question is how public cloud working with virtual network? it's really **virtual** or it's actually someone in datacenter plug & play the utp cable when you creating or deleting virtual network?
