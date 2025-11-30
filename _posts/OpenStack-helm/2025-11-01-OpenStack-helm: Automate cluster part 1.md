@@ -94,6 +94,7 @@ root@ctl1-humanz:~# curl -H "Host: keystone-api.openstack.svc.cluster.local" 10.
 }
 ```
 And yep it's was keystone endpoint.
+
 -------------------------------------------------------------------------------------------------------------------------------
 
 At this point, we should understand how OpenStack-Helm manages OpenStack services. It basically turns systemd or Docker services into pods and load-balances the traffic through Kubernetes Services. In the end, all OpenStack internal endpoints use Kubernetes Services. Here’s an example:
