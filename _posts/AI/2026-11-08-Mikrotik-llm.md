@@ -186,15 +186,15 @@ Now I have all the tools and setup I need. Let's let AI do the work.
 Here's the PoC.
 
 First, I asked Copilot to start the tests. It immediately ran two containers and waited for them to finish.
-![1](../../assets/img/mikrotik/1.png)  
+![1](1.png)  
 
 Once the containers stopped and the results were available, Copilot displayed the data.
-![2](../../assets/img/mikrotik/2.png)  
+![2](2.png)  
 Although I had to ask Copilot whether it needed to recalibrate the PCC, it then automatically recreated the firewall mangle rules to recalibrate the load balancer.
 
 
 
-![3](../../assets/img/mikrotik/3.png)
+![3](3.png)
 
 ### References
 
