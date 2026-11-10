@@ -95,58 +95,9 @@ After doing a little research, I found out that MikroTik now supports containers
 <details>
   <summary>Dockerfile and entrypoint</summary>
   
-  Dockerfile
-  ```Dockerfile
-  FROM alpine:latest AS build
-  ARG ARCH=armhf
-  COPY ./entrypoint.sh /entrypoint.sh
-  RUN chmod +x /entrypoint.sh
-  RUN wget -O speedtest.tgz \
-      "https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-${ARCH}.tgz" \
-      && tar zxvf speedtest.tgz \
-      && chmod +x speedtest && chown root:root speedtest
-  RUN rm speedtest.tgz
-  RUN wget https://curl.se/ca/cacert.pem
+  <script src="https://gist.github.com/JustHumanz/e41946dd21ecedf0d0093698a9e280db.js"></script>
 
-  FROM alpine
-  ENV SERVER_ID=
-  ENV SIMPLE_OUTPUT=
-  RUN apk add --no-cache jq
-  COPY --from=build /speedtest /bin/
-  COPY --from=build /entrypoint.sh /bin/
-  COPY --from=build /cacert.pem /
-  CMD ["/bin/entrypoint.sh"]  
-  ```
-  entrypoint
-
-  ```bash
-  #!/bin/sh
-  set -eu
-
-  run_speedtest() {
-    if [ -n "${SERVER_ID:-}" ]; then
-      /bin/speedtest --server-id="${SERVER_ID}" --accept-license --ca-certificate=/cacert.pem -f json 
-    else
-      /bin/speedtest --accept-license --ca-certificate=/cacert.pem -f json
-    fi
-  }
-
-  if [ -n "${SIMPLE_OUTPUT:-}" ]; then
-    echo "Using simple output"
-    run_speedtest 2>1 | jq -r '{download: .download.bandwidth, upload: .upload.bandwidth, url: .result.url}'
-    exit 0
-  fi
-
-  if [ -n "${SERVER_ID:-}" ]; then
-    echo "Using server ID: ${SERVER_ID}"
-  else
-    echo "Using nearby server"
-  fi
-
-  run_speedtest
-  ```
-
-  Note: To run this container, I set the SERVER_ID environment variable to Singtel so it would use an international route.
+Note: To run this container, I set the SERVER_ID environment variable to Singtel so it would use an international route and for the image you can just pull the image from my repo 'hub.humanz.moe/library/speedtest-armhf:latest'   
 </details>
 
 
